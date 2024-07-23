@@ -79,7 +79,7 @@ footer a:hover{ color: #b0d589;}
 .sidebar .nav-link.active{ color: #fff!important; background:none !important; font-weight: 600;}
 .sidebar .nav-link:hover{ color:#fff!important;}
 .sidebar li .submenu{ list-style: none; margin: 0;padding: 0; padding-left: 1rem; padding-right: 1rem;}
-.content-wrapper{background: #f7f7f7;border-radius: 50px; width: 100%;margin: 20px;}
+.content-wrapper{background: #f7f7f7;border-radius: 50px; width: 100%;margin: 20px; position: relative;}
 .dashboard-logo{color:#fff;}
 .counter-box{color: #222a19;border: 1px solid var(--theme-btn);}
 .counter-box .counter {font-size: 28px;font-weight: 700;}
@@ -137,6 +137,7 @@ footer a:hover{ color: #b0d589;}
 .cus-login .captcha .form-item .description {font-size: 12px;}
 .cus-login .form-actions {margin-bottom: 0!important;}
 .dashboard .after-login-footer {position: absolute; bottom: 0; width: 76%;}
+.content-wrapper .after-login-footer {position: absolute; bottom: 0; width: 92%;}
 
 @media screen and (max-width: 767px) and (min-width: 481px) {
 

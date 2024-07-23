@@ -59,7 +59,7 @@ function vacancy_list_page($district_id = 0, $flat_type_id = 0) {
 	
 	// sd 21-06-2024 start
 	$variables = array(
-		'attributes' => array('class'=>array('table table-list')),
+		'attributes' => array('class'=>array('table table-list table-striped')),
 		'header' => $header,
 		'rows' => $rows,
 		'sticky' => true,
@@ -106,7 +106,7 @@ function vacancy_list_page($district_id = 0, $flat_type_id = 0) {
 	if($result->rowCount() > 0) {
 		//sd turned off 21-06-2024
 		//return l('<img height="18" width="18" src="'.$base_path.drupal_get_path('module', 'vacancy_list').'/images/pdf_icon.png" title="Download Flat Vacancy List" alt="PDF Icon">Download Flat Vacancy List', 'flat_vacancy_list_pdf/'.encrypt_url($district_id).'/'.encrypt_url($flat_type_id).'/'.encrypt_url($flat_status_id).'/'.$data2->flat_type.'_type_flat_vacancy_list_'.time(), array('html'=>TRUE, 'attributes' => array('target' => '_blank', 'style' => 'color: #0090C7;font-weight: 400;text-decoration: none; font-size:14px'))).$output;
-		return l('Download Flat Vacancy List','flat_vacancy_list_pdf/'.encrypt_url($district_id).'/'.encrypt_url($flat_type_id).'/'.encrypt_url($flat_status_id).'/'.$data2->flat_type.'_type_flat_vacancy_list_'.time(),array('html'=>TRUE,'attributes' => array('target' => '_blank','class' => 'btn bg-primary  px-5 rounded-pill text-white fw-bolder mb-2'))).$output;//sd 21-06-2024
+		return l('Download Flat Vacancy List','flat_vacancy_list_pdf/'.encrypt_url($district_id).'/'.encrypt_url($flat_type_id).'/'.encrypt_url($flat_status_id).'/'.$data2->flat_type.'_type_flat_vacancy_list_'.time(),array('html'=>TRUE,'attributes' => array('target' => '_blank','class' => 'btn bg-primary  px-5 rounded-pill text-white fw-bolder mb-2'))).'<div class="mb-5 pb-3">'.$output.'</div>';//sd 21-06-2024
 	}
 	/*else {//sd turned off 21-06-2024
 		return $output;

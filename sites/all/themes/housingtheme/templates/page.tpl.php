@@ -4,7 +4,7 @@
 
 
          <div id="content-wrapper" class="content-wrapper">
-            <div class="main-content p-5 #w-100  min-vh-100">
+            <div class="main-content p-5 min-vh-100">
             
                <?php include('includes/breadcrumb.php'); ?>
                <div id="messages">

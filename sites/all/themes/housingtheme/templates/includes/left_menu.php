@@ -1,6 +1,7 @@
 <?php 
 global $user, $user_role,$base_path,$base_root; 
 
+
 ?>
 <div class="sidebar d-flex flex-column p-3" >
     <a href="<?= $base_root.$base_path ?>" class="d-flex flex-column align-items-center mb-5 text-center">
@@ -13,9 +14,7 @@ global $user, $user_role,$base_path,$base_root;
     <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
             <a href="<?= $base_root.$base_path.'dashboard' ?>" class="nav-link active">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-grid-fill" viewBox="0 0 16 16">
-                <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm8 0A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5z"/>
-                </svg>
+                <i class="fa fa-tachometer" aria-hidden="true"></i>
                 Dashboard
             </a>
         </li>
@@ -40,22 +39,17 @@ global $user, $user_role,$base_path,$base_root;
 
         <li class="nav-item has-submenu">
             <a class="nav-link" href="#">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-file-earmark-person-fill" viewBox="0 0 16 16">
-                <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0m2 5.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-.245S4 12 8 12s5 1.755 5 1.755"/>
-                </svg>
-                New Application  
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down float-end mt-1" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                <i class="fa fa-user-circle-o" aria-hidden="true"></i> New Application <i class="fa fa-angle-down fa-lg float-end mt-1" aria-hidden="true"></i>
                 </svg>
             </a>
             <!--sd start 20-06-2024---->
             <ul class="submenu collapse">
-                <li class=""><?= l('New Allotment','view_application_list/'.encrypt_url($new_status).'/'.encrypt_url('new-apply').'/'.'action-list',array('html'=>true, 'attributes'=>array('class'=>array('nav-link')))); ?>            
+                <li class=""><?= l('<i class="fa fa-clipboard" aria-hidden="true"></i> New Allotment','view_application_list/'.encrypt_url($new_status).'/'.encrypt_url('new-apply').'/'.'action-list',array('html'=>true, 'attributes'=>array('class'=>array('nav-link')))); ?>            
                 </li>
 
-                <li class=""><?= l('Vertical Shifting','view_application_list/'.encrypt_url($new_status).'/'.encrypt_url('vs').'/'.'action-list',array('html'=>true, 'attributes'=>array('class'=>array('nav-link')))); ?></li>
+                <li class=""><?= l('<i class="fa fa-retweet" aria-hidden="true"></i> Vertical Shifting','view_application_list/'.encrypt_url($new_status).'/'.encrypt_url('vs').'/'.'action-list',array('html'=>true, 'attributes'=>array('class'=>array('nav-link')))); ?></li>
 
-                <li class=""><?= l('Category Shifting','view_application_list/'.encrypt_url($new_status).'/'.encrypt_url('cs').'/'.'action-list',array('html'=>true, 'attributes'=>array('class'=>array('nav-link')))); ?></li>
+                <li class=""><?= l('<i class="fa fa-check-square-o" aria-hidden="true"></i> Category Shifting','view_application_list/'.encrypt_url($new_status).'/'.encrypt_url('cs').'/'.'action-list',array('html'=>true, 'attributes'=>array('class'=>array('nav-link')))); ?></li>
             </ul>
             <!--sd end 20-06-2024---->
         </li>
@@ -75,21 +69,18 @@ global $user, $user_role,$base_path,$base_root;
         ?>
         <li class="nav-item has-submenu">
             <a class="nav-link" href="#">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-fill-lock" viewBox="0 0 16 16">
-                <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0m-9 8c0 1 1 1 1 1h5v-1a2 2 0 0 1 .01-.2 4.49 4.49 0 0 1 1.534-3.693Q8.844 9.002 8 9c-5 0-6 3-6 4m7 0a1 1 0 0 1 1-1v-1a2 2 0 1 1 4 0v1a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1zm3-3a1 1 0 0 0-1 1v1h2v-1a1 1 0 0 0-1-1"/>
-            </svg>
-                Allotted Application  
+            <i class="fa fa-file-text-o" aria-hidden="true"></i> Allotted Application  
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down float-end mt-1" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
                 </svg>
             </a>
             <ul class="submenu collapse">
-                 <li class=""><?= l('New Allotment','view_application_list/'.encrypt_url($new_status).'/'.encrypt_url('new-apply').'/'.'action-list',array('html'=>true, 'attributes'=>array('class'=>array('nav-link')))); ?>            
+                 <li class=""><?= l('<i class="fa fa-clipboard" aria-hidden="true"></i> New Allotment','view_application_list/'.encrypt_url($new_status).'/'.encrypt_url('new-apply').'/'.'action-list',array('html'=>true, 'attributes'=>array('class'=>array('nav-link')))); ?>            
                 </li>
 
-                <li class=""><?= l('Vertical Shifting','view_application_list/'.encrypt_url($new_status).'/'.encrypt_url('vs').'/'.'action-list',array('html'=>true, 'attributes'=>array('class'=>array('nav-link')))); ?></li>
+                <li class=""><?= l('<i class="fa fa-retweet" aria-hidden="true"></i> Vertical Shifting','view_application_list/'.encrypt_url($new_status).'/'.encrypt_url('vs').'/'.'action-list',array('html'=>true, 'attributes'=>array('class'=>array('nav-link')))); ?></li>
 
-                <li class=""><?= l('Category Shifting','view_application_list/'.encrypt_url($new_status).'/'.encrypt_url('cs').'/'.'action-list',array('html'=>true, 'attributes'=>array('class'=>array('nav-link')))); ?></li>
+                <li class=""><?= l('<i class="fa fa-check-square-o" aria-hidden="true"></i> Category Shifting','view_application_list/'.encrypt_url($new_status).'/'.encrypt_url('cs').'/'.'action-list',array('html'=>true, 'attributes'=>array('class'=>array('nav-link')))); ?></li>
             </ul>
         </li>
         
@@ -169,11 +160,7 @@ global $user, $user_role,$base_path,$base_root;
 
             <li class="nav-item has-submenu">
             <a class="nav-link" href="#">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-building-lock" viewBox="0 0 16 16">
-                    <path d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6.5a.5.5 0 0 1-1 0V1H3v14h3v-2.5a.5.5 0 0 1 .5-.5H8v4H3a1 1 0 0 1-1-1z"/>
-                    <path d="M4.5 2a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM7.5 5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM4.5 8a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM9 13a1 1 0 0 1 1-1v-1a2 2 0 1 1 4 0v1a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1zm3-3a1 1 0 0 0-1 1v1h2v-1a1 1 0 0 0-1-1"/>
-                </svg>
-                Allotment  
+                <i class="fa fa-pie-chart" aria-hidden="true"></i> Allotment  
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down float-end mt-1" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
                 </svg>
@@ -192,11 +179,7 @@ global $user, $user_role,$base_path,$base_root;
         ?>
         <li class="nav-item has-submenu">
             <a class="nav-link" href="#">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-building-lock" viewBox="0 0 16 16">
-                <path d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6.5a.5.5 0 0 1-1 0V1H3v14h3v-2.5a.5.5 0 0 1 .5-.5H8v4H3a1 1 0 0 1-1-1z"/>
-                <path d="M4.5 2a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM7.5 5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM4.5 8a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM9 13a1 1 0 0 1 1-1v-1a2 2 0 1 1 4 0v1a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1zm3-3a1 1 0 0 0-1 1v1h2v-1a1 1 0 0 0-1-1"/>
-            </svg>
-                Allotment  
+            <i class="fa fa-pie-chart" aria-hidden="true"></i> Allotment  
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down float-end mt-1" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
                 </svg>
@@ -285,13 +268,7 @@ global $user, $user_role,$base_path,$base_root;
         </li>  -->
 
         <li class="nav-item">
-            <?= l('<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-power" viewBox="0 0 16 16">
-                <path d="M7.5 1v7h1V1z"/>
-                <path d="M3 8.812a5 5 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812"/>
-                </svg> Logout','/user/logout',array('html' =>true, 'attributes' => array('class' => array('nav-link')))); ?>
+            <?= l('<i class="fa fa-sign-out" aria-hidden="true"></i> Logout','/user/logout',array('html' =>true, 'attributes' => array('class' => array('nav-link')))); ?>
         </li>        
     </ul>
-    <!-- <br><br><br><br><br><br><br><br><br><br> -->
-    <hr/>
-    <!-- <button type="button" class="btn btn-outline-light border-dashed"><img src="<?= $base_root.$base_path ?>sites/all/themes/housingtheme/images/complaint_icon.png" /><br/>Complaint Management</button> -->
 </div>

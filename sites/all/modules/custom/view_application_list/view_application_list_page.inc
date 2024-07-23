@@ -270,7 +270,7 @@ function view_app_page($status ='', $entity = '',$page_status ='') {
 		
 		// sd 21-06-2024 start
 		$variables = array(
-			'attributes' => array('class'=>array('table table-list')),
+			'attributes' => array('class'=>array('table table-list table-striped')),
 			'header' => $header,
 			'rows' => $rows,
 			'sticky' => true,

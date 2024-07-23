@@ -124,7 +124,7 @@ function rhe_flat_allotment_list_rst_estate($flat_type_id = 0, $flat_status_id =
 				$str.=$data->flat_no.'('.$floor.')';
 				$i++;
 			}else{
-				$str.=', <br>'.$data->flat_no.'('.$floor.')';
+				$str.=', '.$data->flat_no.'('.$floor.')';
 			}
 		}
 	}

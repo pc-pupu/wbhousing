@@ -163,6 +163,7 @@
 		$query->addField('hpf', 'short_code');
 		$query->addField('hpf', 'created_at');
 		$query->addField('hasm', 'status_description');
+		$query->orderBy('hasm.status_id', 'ASC');
 		//echo $query;die;
 		
 		// $query->condition('hoa.online_application_id', $online_application_id, '=');

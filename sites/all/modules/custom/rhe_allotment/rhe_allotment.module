@@ -123,6 +123,55 @@ function get_no_of_applicant_new($allotment_type = '') {
 	return $no_of_applicant;	
 }
 
+
+//////////////////added by debaleena 24.07.2024//////////////////////
+
+function get_applicant_total_count($allotment_type = ''){
+
+	$no_of_applicant = 0;
+	
+	if(!empty($allotment_type)) {
+
+		$result_new = db_query("SELECT count(*) as total_applicant FROM housing_online_application as t1
+					INNER JOIN housing_new_allotment_application as t2 ON t1.online_application_id = t2.online_application_id
+					WHERE t1.status = 'housing_sup_approved_1'
+					AND t2.flat_type_id = " . $allotment_type);
+
+		$record_new = $result_new->fetchObject();
+		$no_of_applicant_new = $record_new -> total_applicant;
+		
+
+		$result_cs = db_query("SELECT count(*) as total_applicant FROM housing_online_application as t1
+					INNER JOIN housing_cs_application as t2 ON t1.online_application_id = t2.online_application_id
+					WHERE t1.status = 'housing_sup_approved_1'
+				AND t2.flat_type_id = " . $allotment_type);
+				////AND t2.flat_type_id = " . $allotment_type);
+		$record_cs = $result_cs->fetchObject();
+		$no_of_applicant_cs = $record_cs -> total_applicant;
+
+		$result_vs = db_query("SELECT count(*) as total_applicant FROM housing_online_application as t1
+					INNER JOIN housing_vs_application as t2 ON t1.online_application_id = t2.online_application_id
+					WHERE t1.status = 'housing_sup_approved_1'
+					AND t2.flat_type_id = " . $allotment_type);
+					
+		$record_vs = $result_vs->fetchObject();
+		$no_of_applicant_vs = $record_vs -> total_applicant;
+		
+	}	
+
+	if($no_of_applicant_new > 0 || $no_of_applicant_cs > 0 || $no_of_applicant_vs){
+	
+		return '1';
+	}else{
+
+		return '0';
+	}
+	
+	//return $no_of_applicant;	
+}
+
+////////////////////////end///////////////////////
+
 function get_vacancy_details($allotment_type, $estate_id, $application_type, $district_code = 0) {
 	$vacancy_details = array(); $condition = "";
 	// $floor['vs'] = "('F','S')";

@@ -54,8 +54,18 @@ function rhe_allotment_form_submit($form, &$form_state) {
 		module_load_include('inc', 'rhe_allotment', 'rhe_allotment_update');
 		$allotment_type = $form_state['values']['allotment_type'];
 		$district_code = $form_state['values']['district_code'];
-		rhe_allotment_update($allotment_type, $district_code);
-		drupal_set_message('Allotment Process Completed Successfully', 'success');
+		$get_applicant_count = get_applicant_total_count($allotment_type);   //added by debaleena 24.07.2024
+		//echo $get_applicant_count;die;
+		if($get_applicant_count > 0) //added by debaleena 24.07.2024
+		{
+			rhe_allotment_update($allotment_type, $district_code);
+			drupal_set_message('Allotment Process Completed Successfully');
+		}else{
+			drupal_set_message('No Application Available for Allotment','error');
+		}
+		
+
+		
 	}
 	$form_state['rebuild'] = TRUE;
 }

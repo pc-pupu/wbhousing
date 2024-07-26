@@ -77,7 +77,6 @@ function application_status_form($form,&$form_state) {
 		//$flat_type_id = 0;
 		
 		 while($data = $result->fetchObject()) {
-			
 			//print_r($data->status_description);die;
 			$fields[] = array('data' => $data->status_description, 'class' => array('text-align-c'));
 			$fields[] = array('data' => $data->created_at, 'class' => array('text-align-c'));
@@ -144,7 +143,7 @@ function application_status_form($form,&$form_state) {
 		array(
 		  'header' => $header,
 		  'rows' => $rows,
-		  'attributes' => array('class'=>array('table table-list')),
+		  'attributes' => array('class'=>array('table table-list table-striped')),
 		  'sticky' => true,
 		  'caption' => '',
 		  'colgroups' => array(),

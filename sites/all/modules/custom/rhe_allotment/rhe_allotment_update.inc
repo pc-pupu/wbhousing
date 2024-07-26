@@ -5,14 +5,16 @@ function rhe_allotment_update($allotment_type='', $district_code=0) {
            
         $transaction = db_transaction();
         try {
-            update_housing_allotment_process($allotment_type);
+            $get_allot_process_no = update_housing_allotment_process($allotment_type);
             foreach($all_vacant_estates as $estate)  { // For each estate floor and category shifting is performed
                 $estate_id = $estate -> estate_id;
                 update_rhe_allotment_vs($allotment_type, $estate_id, $district_code);
                 update_rhe_allotment_cs($allotment_type, $estate_id, $district_code);
             }  // End of floor & category shifting
             update_rhe_allotment_new($allotment_type, $district_code); // Allotment for new applicant after completion of floor & category shifting
+            drupal_set_message('Allotment Process Completed Successfully with Process No '.$get_allot_process_no);
             drupal_goto("/rhe_allotment");
+
         } catch (Exception $e) {
             $transaction->rollback();
             watchdog_exception('rhe_allotment', $e);
@@ -155,9 +157,22 @@ function update_housing_allotment_process($allotment_type) {
     $allotment_process_arr['allotment_process_type']  = 'ALOT';
     $allotment_process_arr['allotment_flat_type']  = $allotment_type;    
 
-    db_insert('housing_allotment_process')
+    $get_last_id = db_insert('housing_allotment_process')   //added $get_last_id by debaleena 
         ->fields($allotment_process_arr)
         ->execute();
+
+
+    //////////// debaleena start 24.07.2024////////////////////
+    $get_process_no = db_query("select allotment_process_no from housing_allotment_process
+                                    where allotment_process_id = " . $get_last_id);
+
+    $get_process_no = $get_process_no->fetchObject()->allotment_process_no;
+    //echo $get_process_no;die;
+    return $get_process_no;   
+
+    ///////////////////end///////////////////// 
+
+        
 }
 function update_housing_online_application($online_application_id) {
     global $user;

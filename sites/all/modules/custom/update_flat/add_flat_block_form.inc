@@ -86,14 +86,14 @@
 			  //'attributes' => array(),// sd 24-06-2024
 			  'header' => $header,
 			  'rows' => $rows,
-			  'attributes'=> array('class'=>array('table table-list')),// sd 24-06-2024
+			  'attributes'=> array('class'=>array('table table-list table-striped')),// sd 24-06-2024
 			);
 			
 			$output = theme('datatable', $variables);
 		}
 		else {
 			$output = '<div>
-							<table class="datatable_no_data_found table table-list">
+							<table class="datatable_no_data_found table table-list table-striped">
 								<tr class="tr_no_data_found">
 									<th class="th_no_data_found"></th>
 								</tr>
@@ -104,5 +104,5 @@
 						</div>';
 		}
 		
-		return $output;
+		return '<div class ="mb-5 pb-3">'.$output.'</div>';
 	}

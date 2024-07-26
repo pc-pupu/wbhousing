@@ -154,14 +154,14 @@
 			  //'attributes' => array(),// sd 24-06-2024
 			  'header' => $header,
 			  'rows' => $rows,
-			  'attributes'=>array('class'=>array('table table-list')),// sd 24-06-2024
+			  'attributes'=>array('class'=>array('table table-list table-striped')),// sd 24-06-2024
 			);
 			
 			$output = theme('datatable', $variables);
 		}
 		else {
 			$output = '<div>
-							<table class="datatable_no_data_found table table-list">
+							<table class="datatable_no_data_found table table-list table-striped">
 								<tr class="tr_no_data_found">
 									<th class="th_no_data_found"></th>
 								</tr>
@@ -181,7 +181,7 @@
 			//return l('<img height="18" width="18" src="'.$base_path.drupal_get_path('module', 'update_flat').'/images/pdf_icon.png" title="Download Flat List" alt="PDF Icon">Download Flat List Of '.$data1->estate_name,'rhe_wise_flat_list_pdf/'.encrypt_url($rhe_name).'/'.$file_name, array('html'=>TRUE, 'attributes' => array('target' => '_blank', 'style' => 'color: #0090C7;font-weight: 400;text-decoration: none; font-size:14px'))).$output;
 			$url = l('Download Flat List of '.$data1->estate_name,'rhe_wise_flat_list_pdf/'.encrypt_url($rhe_name).'/'.$file_name,array('html' => true, 'attributes' => array('target' => '_blank','class' => array('btn bg-primary  px-5 rounded-pill text-white fw-bolder mb-4'))));
 
-			return $url.$output;//sd 24-06-2024
+			return $url.'<div class="mb-5 pb-3">'.$output.'</div>';//sd 24-06-2024
 		}
 		else {
 			return $output;

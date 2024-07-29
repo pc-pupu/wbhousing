@@ -12,19 +12,26 @@ a{ text-decoration: none; color: inherit;}
   --bs-text: #fff;
   --theme-font: "Inter", sans-serif;;
 }
-.slider{background-image: url(../images/bg.jpg);background-position: center;background-repeat: no-repeat;background-attachment: fixed;background-size: cover;width: 100vw;height: 100vh;position: relative; overflow: hidden;}
+.slider{background-image: url(../images/bg.jpg);background-position: center;background-repeat: no-repeat;background-attachment: fixed;background-size: cover;width: 100vw;height: 100vh;position: relative; overflow: hidden; z-index: 1;}
 .lead{color: var(--theme-color);font-weight:600;}
-.admin-login{border-radius: 40px;padding: 7px 20px;background:var(--theme-btn);color: #fff;border: none;font-weight: 500;z-index: 1;transition: background 0.4s linear;}
+.admin-login{border-radius: 40px;padding: 7px 20px;background:var(--theme-btn);color: #fff;border: none;font-weight: 500;z-index: 9;transition: background 0.4s linear;}
 .admin-login:hover{background: var(--theme-color);}
 
 .search{margin-bottom: auto; margin-top: auto;height: 70px;background-color: #fff;border-radius: 40px;padding: 10px;}
 .search_input{color: #000;border: 0;outline: 0;background: none;margin-top:5px;caret-color:transparent;line-height: 40px;padding: 0 10px;width: 550px;}
 .search_icon{ height: 50px; width: 50px; float: right; display: flex; justify-content: center; align-items: center; border-radius: 50%; color:white; background-color:var(--theme-color);border: none; }
 .search_icon:hover{ background: var(--theme-btn); color: #fff; }
-    
-.overlay-1 { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(
-          270deg,  rgba(226, 224, 211, 0) 0%,  rgb(0 0 0 / 51%) 100%);}
-.overlay-2 { position: absolute; top: 0; left: 0; width: 250.625em; height: 23.8em; background: url(../images/cloud-overlay.png) 0 100% repeat-x; -webkit-animation: cloudLoop 80s linear infinite; animation: cloudLoop 80s linear infinite; z-index: 2; pointer-events: none; height: 43.75em; }
+.logo {position: relative; z-index: 9;}
+.logo-text {position: relative; z-index: 9;}
+
+// .overlay-1 { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(
+//           270deg,  rgba(226, 224, 211, 0) 0%,  rgb(0 0 0 / 51%) 100%);}
+// .overlay-2 { position: absolute; top: 0; left: 0; width: 250.625em; height: 23.8em; background: url(../images/cloud-overlay.png) 0 100% repeat-x; -webkit-animation: cloudLoop 80s linear infinite; animation: cloudLoop 80s linear infinite; z-index: 2; pointer-events: none; height: 43.75em; }
+.overlay-1 { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.overlay-2 { position: absolute; top: 0; left: 0; width: 250.625em; height: 23.8em; background: url(../images/cloud-overlay4.png) 0 100% repeat-x; -webkit-animation: cloudLoop 200s linear infinite; animation: cloudLoop 200s linear infinite; z-index: 2; pointer-events: none; height: 20.75em; }
+.ftr-cnt-notice {font-size: 14px;font-weight: 300; color: #aeaeae!important;}
+footer p.copyright, .ftr-link p, .ftr-link p a {color: #909090;}
+.ftr-link p a:hover {color: #dedede;}
 @-webkit-keyframes cloudLoop {
         0% {
           -webkit-transform: translate3d(0, 0, 0);

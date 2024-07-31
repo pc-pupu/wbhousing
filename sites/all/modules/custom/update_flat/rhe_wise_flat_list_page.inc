@@ -121,7 +121,8 @@
 			// 		$fields[] = '';
 			$fields[] = $data->floor;
 			 $fields[] = $data->flat_no;
-			 $fields[] = $data->flat_status;
+			 //$fields[] = $data->flat_status;   //turned off by debaleena 26-07-2024
+			 $fields[] = $data->flat_status_code; //added by debaleena 26-07-2024
 			 
 			 $rows[]  = $fields;
 			 

@@ -45,11 +45,11 @@
 				$counter=1;
 				foreach ($estate_preference_arr as $value) {
 					$estateDetailsData = array(
-	            'estate_id' => $value['estate_id'],
-	            'preference_order' => $counter,
-	            'online_application_id' => $online_application_id,
-	            'created' => date('d-m-y h:i:s')
-		       );
+											'estate_id' => $value['estate_id'],
+											'preference_order' => $counter,
+											'online_application_id' => $online_application_id,
+											'created' => date('d-m-y h:i:s')
+										);
 					$counter++;
 					// print_r($estateDetailsData);die;
 					$estateDetailsInsertQuery->values($estateDetailsData)->execute();

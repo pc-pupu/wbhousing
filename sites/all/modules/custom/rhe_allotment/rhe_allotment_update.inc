@@ -308,12 +308,9 @@ function get_vacancy_details_new($flat_type_id, $district_code = 0) {
         when t1.floor = 'Fourth' then 4
         when t1.floor = 'Fifth' then 5
         when t1.floor = 'Sixth' then 6
-        when t1.floor = 'Seventh' then 7
-        when t1.floor = 'Eighth' then 8
-        when t1.floor = 'Ninth' then 9
-        when t1.floor = 'Tenth' then 10
-        when t1.floor = 'Ground' then 11
-        when t1.floor = 'Top' then 12
+       
+        when t1.floor = 'Ground' then 7
+        when t1.floor = 'Top' then 8
         END, 
         t1.floor");
 

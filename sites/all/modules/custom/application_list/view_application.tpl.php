@@ -12,7 +12,7 @@ if($isVal){
 	$common_data = $output[1];
 	$applicant_data = $output[3];
   
-  // echo "<pre>";print_r($preference_data);exit;
+  //  echo "<pre>";print_r($output);exit;
 
   //debolina start
   $preference_data=$output[5];
@@ -29,6 +29,7 @@ if($isVal){
   ?>
            
 </div>
+
 
 <!--Appication display theme new copy-->
 <div class="table-bottom">

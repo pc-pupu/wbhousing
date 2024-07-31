@@ -39,7 +39,7 @@
 			
 			$fields[] = $data->floor;
 			 $fields[] = $data->flat_no;
-			 $str = $data->flat_status;
+			 $str = $data->flat_status_code;   //flat_status_code added by debaleena 26-07-2024
 			 //if($data->is_occupied == FALSE) {
 				//  $options['attributes']['class'] = array('button','small','round','link-button','steel_blue');
 				$options['attributes']['class'] = array('btn bg-primary btn-sm px-5 mb-4 rounded-pill text-white fw-bolder');
@@ -77,7 +77,7 @@
 			  '#theme' => 'datatable',
 			  '#header' => $header,
 			  '#rows' => $rows,
-			  '#attributes' => array('class'=>array('table table-list')),
+			  '#attributes' => array('class'=>array('table table-list table-striped')),
 			);
 		
 			// Or, render using a theme function.
@@ -85,7 +85,7 @@
 			  //'attributes' => array(),
 			  'header' => $header,
 			  'rows' => $rows,
-			  'attributes' => array('class'=>array('table table-list')),
+			  'attributes' => array('class'=>array('table table-list table-striped')),
 			);
 			
 			$output = theme('datatable', $variables);
@@ -105,9 +105,9 @@
 	
 		
 		if($result->rowCount() > 0) {
-			return /*l('<img height="18" width="18" src="'.$base_path.drupal_get_path('module', 'update_flat').'/images/pdf_icon.png" title="Download RHE Flat List" alt="PDF Icon">Download RHE Flat List','flat_list_pdf/flat_list_'.time(), array('html'=>TRUE, 'attributes' => array('target' => '_blank', 'style' => 'color: #0090C7;font-weight: 400;text-decoration: none; font-size:14px'))).*/$output;
+			return /*l('<img height="18" width="18" src="'.$base_path.drupal_get_path('module', 'update_flat').'/images/pdf_icon.png" title="Download RHE Flat List" alt="PDF Icon">Download RHE Flat List','flat_list_pdf/flat_list_'.time(), array('html'=>TRUE, 'attributes' => array('target' => '_blank', 'style' => 'color: #0090C7;font-weight: 400;text-decoration: none; font-size:14px'))).*/'<div class="mb-5 pb-3">'.$output.'</div>';
 		}
 		else {
-			return $output;
+			return '<div class="mb-5 pb-3">'.$output.'</div>';
 		}
 	}

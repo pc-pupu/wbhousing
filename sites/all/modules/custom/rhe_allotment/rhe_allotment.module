@@ -57,10 +57,7 @@ function get_estatewise_vacancy($allotment_type, $district_code = 0) {
 		count(case when t1.floor = 'Fourth' then t1.flat_id end) as floor_4,
 		count(case when t1.floor = 'Fifth' then t1.flat_id end) as floor_5,
 		count(case when t1.floor = 'Sixth' then t1.flat_id end) as floor_6,
-		count(case when t1.floor = 'Seventh' then t1.flat_id end) as floor_7,
-		count(case when t1.floor = 'Eighth' then t1.flat_id end) as floor_8,
-		count(case when t1.floor = 'Ninth' then t1.flat_id end) as floor_9,
-		count(case when t1.floor = 'Tenth' then t1.flat_id end) as floor_10,
+
 		count(case when t1.floor = 'Top' then t1.flat_id end) as floor_top
 		FROM housing_flat AS t1
 		INNER JOIN housing_estate AS t2 ON t1.estate_id = t2.estate_id
@@ -176,7 +173,7 @@ function get_vacancy_details($allotment_type, $estate_id, $application_type, $di
 	$vacancy_details = array(); $condition = "";
 	// $floor['vs'] = "('F','S')";
 	// $floor['cs'] = "('G', 'T')";
-	$floor['vs'] = "('First','Second','Third','Fourth','Fifth','Sixth','Seventh','Eighth','Ninth','Tenth')";
+	$floor['vs'] = "('First','Second','Third','Fourth','Fifth','Sixth')";
 	$floor['cs'] = "('Ground', 'Top')";
 
 	if(isset($estate_id) && !empty($estate_id)) {

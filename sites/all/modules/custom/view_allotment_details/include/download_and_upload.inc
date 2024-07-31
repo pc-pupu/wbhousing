@@ -7,7 +7,7 @@ function download_and_upload($form, &$form_state, $online_application_id = ''){
 
     $form['markup_application'] = array(
         '#type' => 'markup',
-        '#markup' => '<br><div class="row" style="padding-right:20px;">'.l('<img height="18" width="18" src="'.$base_path.drupal_get_path('module', 'application_of_registration_list').'/images/download_icon.png" title="Download Application Form" alt="PDF Icon"> Download Application Form ', 'form-of-application/'.$online_application_id, array('html'=>TRUE, 'attributes' => array('target' => '_blank', 'style' => 'color: #0090C7;font-weight: 400;text-decoration: none; font-size:14px'))).'</div><br>'
+        '#markup' => '<br><div class="row" style="padding-right:20px;">'.l('<img height="18" width="18" src="'.$base_path.drupal_get_path('module', 'application_of_registration_list').'/images/download_icon.png" title="Download Application Form" alt="PDF Icon"> Download License Application Form ', 'form-of-application/'.$online_application_id, array('html'=>TRUE, 'attributes' => array('target' => '_blank', 'style' => 'color: #0090C7;font-weight: 400;text-decoration: none; font-size:14px'))).'</div><br>'
     ); 
 
     $form['markup_declaration'] = array(
@@ -20,7 +20,7 @@ function download_and_upload($form, &$form_state, $online_application_id = ''){
     $form['licence_application_file'] = array(
         '#title' => t('Upload Licence Application Signed Form'),
         '#type' => 'managed_file',
-        '#description' => t('Allowed extensions: pdf'),
+        '#description' => t('<b>Allowed Extension: pdf<br>Maximum File Size: 2 MB</b>') ,
         '#progress_message' => t('Please wait...'),
         '#progress_indicator' => 'bar',
         '#default_value' => variable_get('Upload File', ''),
@@ -37,7 +37,7 @@ function download_and_upload($form, &$form_state, $online_application_id = ''){
     $form['declaration_file'] = array(
         '#title' => t('Upload Declaration Signed Form'),
         '#type' => 'managed_file',
-        '#description' => t('Allowed extensions: pdf'),
+        '#description' => t('<b>Allowed Extension: pdf<br>Maximum File Size: 2 MB</b>') ,
         '#progress_message' => t('Please wait...'),
         '#progress_indicator' => 'bar',
         '#default_value' => variable_get('Upload File', ''),
@@ -54,7 +54,7 @@ function download_and_upload($form, &$form_state, $online_application_id = ''){
     $form['payslip_file'] = array(
         '#title' => t('Upload Current Pay Slip'),
         '#type' => 'managed_file',
-        '#description' => t('Allowed extensions: pdf'),
+        '#description' => t('<b>Allowed Extension: pdf<br>Maximum File Size: 2 MB</b>') ,
         '#progress_message' => t('Please wait...'),
         '#progress_indicator' => 'bar',
         '#default_value' => variable_get('Upload File', ''),
@@ -80,6 +80,16 @@ function download_and_upload($form, &$form_state, $online_application_id = ''){
         '#attributes'=>array('class'=>array('text-centre btn bg-primary btn-sm px-5 mt-5 rounded-pill text-white fw-bolder')),
         
     );
+
+
+     // Add a new item to the bottom of the form.
+     $form['my_custom_note'] = array(
+        '#type' => 'item',
+        '#markup' => '<p style="color: red;">**Note : Please download the Application Form and Declaration Form.You have to 
+        sign these documents and upload duly signed License Application Form,Declaration and Latest Payslip. </p>',
+        '#weight' => 100, // Ensures that it is placed at the bottom.
+        
+      );
     
     return $form;
     

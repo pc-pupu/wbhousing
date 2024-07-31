@@ -39,6 +39,9 @@
 		$header[] = array('data' => 'Allotment Date', 'width' => '10%');
 		$header[] = array('data' => 'District', 'width' => '15%');
 		$header[] = array('data' => 'Flat Type', 'width' => '5%');
+		$header[] = array('data' => 'Block No.', 'width' => '5%');  //debaleena 29-07-2024
+		$header[] = array('data' => 'Flat No.', 'width' => '5%');  //debaleena 29-07-2024
+		$header[] = array('data' => 'Floor.', 'width' => '5%');  //debaleena 29-07-2024
 		$header[] = array('data' => 'Alloted Estate Name & Address', 'width' => '25%');
 		//$header[] = array('data' => 'Alloted Estate Address');
 		//$header[] = array('data' => 'Alloted Flat No');
@@ -54,6 +57,9 @@
 			$fields[] = implode('/', array_reverse(explode('-', $data->allotment_date)));
 			$fields[] = $data->district_name;
 			$fields[] = $data->flat_type;
+			$fields[] = $data->block_name;  //debaleena 29-07-2024
+			$fields[] = $data->flat_no;   //debaleena 29-07-2024
+			$fields[] = $data->floor;  //debaleena 29-07-2024
 			$fields[] =	$data->estate_name.',<br>'.$data->estate_address;
 			//$fields[] =	$data->estate_address;
 			//$fields[] = $data->flat_no;

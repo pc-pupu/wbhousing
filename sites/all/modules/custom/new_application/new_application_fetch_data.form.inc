@@ -56,6 +56,7 @@ function fetch_new_app_status($status){
 			$form['allotment_reason']['rhe_flat_type']['#default_value'] = trim($rhe_flat_type);
 			$form['allotment_reason']['reason']['#options'] = allotment_category_list(trim($rhe_flat_type));
 			$form['allotment_reason']['reason']['#default_value'] = trim($data->allotment_category);
+			
 			if(trim($data->allotment_category) == 'Transfer' || trim($data->allotment_category) == 'Physically Handicapped Or Serious Illness' || trim($data->allotment_category) == 'Officer on Transfer having earmarked Bungalow or Quater in their immediate previous posting') {
 				$form['document_upload']['extra_doc']['#default_value'] = trim($data->extra_doc);		
 			}

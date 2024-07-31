@@ -172,7 +172,7 @@
 		$online_app_arr['status']  =  trim($status);
 		
 		$online_app_arr['application_no'] = $app_type;
-		
+		//echo "<pre>";print_r($online_app_arr);die;
 		if($app_type == 'NA' && $comp_serial_no != '') {
 			$online_app_arr['computer_serial_no'] = $comp_serial_no;
 		}		

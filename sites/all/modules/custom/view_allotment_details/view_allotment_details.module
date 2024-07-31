@@ -98,6 +98,8 @@
 		'hf.flat_type_id = hft.flat_type_id');
 		$query->innerJoin('housing_district', 'hd', 
 		'he.district_code = hd.district_code');
+		$query->innerJoin('housing_block', 'hb', 
+		'hb.block_id = hf.block_id');    //debaleena 29-07-2024
 		$query->fields('ha', array());
 		$query->addField('hoa', 'online_application_id');
 		$query->addField('hfo', 'allotment_no');
@@ -110,6 +112,8 @@
 		$query->addField('he', 'estate_name');
 		$query->addField('he', 'estate_address');
 		$query->addField('hd', 'district_name');
+		$query->addField('hb', 'block_name');  //debaleena 29-07-2024
+		$query->addField('hf', 'floor');  //debaleena 29-07-2024
 		
 		// allowed application to view
 		$status_arr = array('housing_official_approved','allotted','applicant_acceptance','applicant_reject','ddo_verified_2','ddo_reject_2','housing_sup_approved_2','housing_sup_reject_2','license_generate');
@@ -210,6 +214,7 @@
 		return $query->execute();
 	}*/
 
+	// added by moumita
 	function get_applicant_upload_docs($app_id = ''){
 		global $user;
 		$query = db_select('housing_online_application_upload_doc', 'haupdoc');
@@ -221,3 +226,8 @@
 		}
 		return $query->execute();
 	}
+
+	/// end////////
+
+
+	

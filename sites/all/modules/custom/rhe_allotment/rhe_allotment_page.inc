@@ -90,10 +90,6 @@ function get_vacancy_applicant($allotment_type, $district_code = 0) {
 			<th>Floor-4</th>
 			<th>Floor-5</th>
 			<th>Floor-6</th>
-			<th>Floor-7</th>
-			<th>Floor-8</th>
-			<th>Floor-9</th>
-			<th>Floor-10</th>
 			<th>Floor-Top</th>
 			<th>Floor shifting</th>
 			<th>Category shifting</th>
@@ -123,10 +119,7 @@ function get_vacancy_applicant($allotment_type, $district_code = 0) {
 						<td>' . $record -> floor_4 . '</td>
 						<td>' . $record -> floor_5 . '</td>
 						<td>' . $record -> floor_6 . '</td>
-						<td>' . $record -> floor_7 . '</td>
-						<td>' . $record -> floor_8 . '</td>
-						<td>' . $record -> floor_9 . '</td>
-						<td>' . $record -> floor_10 . '</td>
+						
 						<td>' . $record -> floor_top . '</td>
 						<td>' . $applicant_vs . '</td>
 						<td>' . $applicant_cs . '</td>
@@ -142,10 +135,7 @@ function get_vacancy_applicant($allotment_type, $district_code = 0) {
 						<td>' . $record -> floor_4 . '</td>
 						<td>' . $record -> floor_5 . '</td>
 						<td>' . $record -> floor_6 . '</td>
-						<td>' . $record -> floor_7 . '</td>
-						<td>' . $record -> floor_8 . '</td>
-						<td>' . $record -> floor_9 . '</td>
-						<td>' . $record -> floor_10 . '</td>
+						
 						<td>' . $record -> floor_top . '</td>
 						<td>' . $applicant_vs . '</td>
 						<td>' . $applicant_cs . '</td>

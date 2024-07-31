@@ -190,7 +190,7 @@
 			'#title' => t('Floor No.'),
 			'#type' => 'select',
 			// '#options' => array('G' => 'Ground', 'F' => 'First', 'S' => 'Second', 'T' => 'Third'),
-			'#options' => array('Ground' => 'Ground', 'First' => 'First', 'Second' => 'Second', 'Third' => 'Third','Fourth'=>'Fourth','Fifth'=>'Fifth','Sixth'=>'Sixth','Seventh'=>'Seventh','Eighth'=>'Eighth','Ninth'=>'Ninth','Tenth'=>'Tenth','Top'=>'Top'),
+			'#options' => array('Ground' => 'Ground', 'First' => 'First', 'Second' => 'Second', 'Third' => 'Third','Fourth'=>'Fourth','Fifth'=>'Fifth','Sixth'=>'Sixth','Top'=>'Top'),
 			'#required' => TRUE,
 			//'#weight' => -10,
 			'#prefix' => '<div class="col-md-6"><div class="form-floating">',//sd 24-06-2024
@@ -449,7 +449,7 @@
 			'#title' => t('Floor No.'),
 			'#type' => 'select',
 			// '#options' => array('G' => 'Ground', 'F' => 'First', 'S' => 'Second', 'T' => 'Third'),
-			'#options' => array('Ground' => 'Ground', 'First' => 'First', 'Second' => 'Second', 'Third' => 'Third','Fourth'=>'Fourth','Fifth'=>'Fifth','Sixth'=>'Sixth','Seventh'=>'Seventh','Eighth'=>'Eighth','Ninth'=>'Ninth','Tenth'=>'Tenth','Top'=>'Top'),
+			'#options' => array('Ground' => 'Ground', 'First' => 'First', 'Second' => 'Second', 'Third' => 'Third','Fourth'=>'Fourth','Fifth'=>'Fifth','Sixth'=>'Sixth','Top'=>'Top'),
 			'#required' => TRUE,
 			'#default_value' => $edit->floor,
 			//'#weight' => -10,

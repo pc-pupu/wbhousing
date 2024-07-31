@@ -636,7 +636,7 @@
 
 	$form['submit'] = array(
 		'#prefix' =>'<div class="col-12 border-top pt-3">',
-		'#suffix' => '</div>',
+		'#suffix' => '</div><div class="mb-5 pb-3"></div>',
 		'#value' => t('Apply'),
 		'#type' => 'submit',
 		'#weight' => 51,

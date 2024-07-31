@@ -338,6 +338,7 @@
 		}
 		
 		if(trim($reason) == 'Transfer' || trim($reason) == 'Physically Handicapped Or Serious Illness' || trim($reason) == 'Officer on Transfer having earmarked Bungalow or Quater in their immediate previous posting') {
+			echo "llll";die;
 			if($form['document_upload']['extra_doc']['#value']['fid'] == 0) {
 				form_set_error('extra_doc', t('Please Upload Allotment Reason Supporting Document.'));
 			}

@@ -729,10 +729,11 @@
 								
 		$form['form_end'] = array(
 			'#type' => 'markup',
-			'#markup' => '</div>',
+			'#markup' => '</div><div class="mb-5 pb-3"></div>',
 		);
 		
 		return $form;
+		//return '<div class="mb-5 pb-3">'.$form.'</div>';
 		}
 	}
 	

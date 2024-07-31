@@ -42,6 +42,7 @@ jQuery(window).load(function () {
 
 jQuery(document).ready(function () {
 	var allotment_category = jQuery('#check_allotment_reason').val();
+	//alert(allotment_category);
 	if ((allotment_category != 'Transfer') && (allotment_category != 'Physically Handicaped Or Serious Illness') && (allotment_category != 'Officer on Transfer having earmarked Bungalow or Quater in their immediate previous posting')) {
 		jQuery('.form-item-extra-doc').hide();
 	}
@@ -50,15 +51,18 @@ jQuery(document).ready(function () {
 	jQuery('#check_allotment_reason').change(function () {
 		//alert('ok');
 		var allotment_category = jQuery(this).val();
-		//alert('Test');
+		//alert(allotment_category);
 		if (allotment_category == 'Transfer') {
 			jQuery('.form-item-extra-doc').show();
-		} else if (allotment_category == 'Physically Handicaped Or Serious Illness') {
+		} else if (allotment_category == 'Physically Handicaped or Serious Illness') {    //debaleena 30-07-2024
 			jQuery('.form-item-extra-doc').show();
-		} else if (allotment_category == 'Officer on Transfer having earmarked Bungalow or Quater in their immediate previous posting') {
+		} else if (allotment_category == 'Recommended') {									//debaleena 30-07-2024
 			jQuery('.form-item-extra-doc').show();
-		}
-		else {
+		}else if (allotment_category == 'Single Earning Lady') {					//debaleena 30-07-2024
+			jQuery('.form-item-extra-doc').show();
+		}else if (allotment_category == 'Legal Heir') {					//debaleena 30-07-2024
+			jQuery('.form-item-extra-doc').show();
+		}else {
 			jQuery('.form-item-extra-doc').hide();
 		}
 	});

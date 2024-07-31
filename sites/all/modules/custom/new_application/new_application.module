@@ -639,6 +639,7 @@ function new_application_form_application_form_alter(&$form, &$form_state, $form
 
 function new_application_validate(&$form, &$form_state)
 {
+    
     $file_payslip = file_load($form_state['values']['file']);
     $file_scaned_sign = file_load($form_state['values']['scaned_sign']);
     $file_extra_doc = file_load($form_state['values']['extra_doc']);
@@ -654,9 +655,10 @@ function new_application_validate(&$form, &$form_state)
     $reason = isset($form_state['values']['reason']) ? $form_state['values']['reason'] : '';
     //$reason = $form_state['values']['reason'];
     form_set_value($form['allotment_reason']['reason'], $reason, $form_state);
-
-    if (trim($reason) == 'Transfer' || trim($reason) == 'Physically Handicaped Or Serious Illness' || trim($reason) == 'Officer on Transfer having earmarked Bungalow or Quater in their immediate previous posting')
+    
+    if (trim($reason) == 'Transfer' || trim($reason) == 'Physically Handicaped Or Serious Illness' || trim($reason) == 'Single Earning Lady' || trim($reason) == 'Recommended' || trim($reason) == 'Legal Heir')
     {
+       // echo "kkk";die;
         if ($form['document_upload']['extra_doc']['#value']['fid'] == 0)
         {
             form_set_error('extra_doc', t('Please Upload Allotment Reason Supporting Document.'));
@@ -672,7 +674,8 @@ function new_application_validate(&$form, &$form_state)
 
     /*if((trim($reason) != 'Transfer' && $form['document_upload']['extra_doc']['#value']['fid'] != 0) || (trim($reason) == 'Officer on Transfer having earmarked Bungalow or Quater in their immediate previous posting' && $form['document_upload']['extra_doc']['#value']['fid'] != 0) || (trim($reason) != 'Physically Handicapped Or Serious Illness' && $form['document_upload']['extra_doc']['#value']['fid'] != 0)) {
     //if($form['document_upload']['extra_doc']['#value']['fid'] != 0) {
-    form_set_error('extra_doc1', t('You have to choose Allotment Reason Transfer / Officer on Transfer having earmarked Bungalow or Quater in their immediate previous posting / Physically Handicapped Or Serious Illness.'));
+    form_set_error('extra_doc1', t('
+    '));
     //}
     }*/
 
@@ -701,7 +704,7 @@ function new_application_element_process($element, &$form_state, $form)
 function new_application_submit($form, &$form_state)
 {   
     
-    //print_r($form_state['values']['first_preference']);die;
+    //print_r($form_state['values']);die;
     //exit();
     /*echo '<pre>';
     print_r($form_state);

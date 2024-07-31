@@ -36,7 +36,7 @@
 		//$query->condition('hfs.is_occupied', FALSE, '=');
 		$result = $query->execute();
 		foreach($result as $val) {
-			$flat_status_options[$val->flat_status_id] = $val->flat_status;
+			$flat_status_options[$val->flat_status_id] = $val->flat_status_code;  //flat_status_code added by debaleena 26-07-2024
 		}
 		
 		return $flat_status_options;
@@ -123,6 +123,7 @@
 		$query->addField('hd', 'district_name');
 		$query->addField('hb', 'block_name');	
 		$query->addField('hfs', 'flat_status');
+		$query->addField('hfs', 'flat_status_code');
 		$query->addField('hfs', 'is_occupied');
 		$query->addField('hft', 'flat_type');
 		if($rhe_name != 0 && $flat_type != 0 && $block_name != 0){
@@ -203,6 +204,7 @@
 		$query->addField('hd', 'district_name');
 		$query->addField('hb', 'block_name');	
 		$query->addField('hfs', 'flat_status');
+		$query->addField('hfs', 'flat_status_code');
 		$query->addField('hfs', 'is_occupied');
 		$query->addField('hft', 'flat_type');
 		if($rhe_name != 0){

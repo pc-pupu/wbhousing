@@ -185,7 +185,7 @@
 				$output[] = check_application_entity(0,$app_id);
 				$output[] = applicant_personal_info_detail($app_id)->fetchObject();
 
-				// print_r($output); die;
+				//echo "<pre>"; print_r($output); die;
 				
 				$applicant_uid = $output[3]->uid;
 				//debolina start
@@ -201,7 +201,7 @@
 				if($fetchDoc->rowCount() >0){
 					$doc_arr = $fetchDoc->fetchAllKeyed($key_index = 8, $value_index = 7);
 
-					// print_r($doc_arr); die;
+					 //print_r($doc_arr); die;
 					
 					$output['doc']['license_application_signed_form_url'] = $base_root.$base_path.'sites/default/files/doc/'.$applicant_uid.'/'.$doc_arr['license_application_signed_form'];
 					$output['doc']['license_application_signed_form_fname'] = $doc_arr['license_application_signed_form'];
@@ -217,6 +217,13 @@
 					$output['doc']['declaration_signed_form_url'] = $output['doc']['declaration_signed_form_fname'] = '';			
 					$output['doc']['current_pay_slip_url'] = $output['doc']['current_pay_slip_fname'] = '';
 				}
+
+
+				//added by debaleena 31-07-2024
+
+				//$fetch_extra_doc = get_upload_extra_doc($app_id);
+
+				////end/////
 
 			}
 		}
@@ -1199,4 +1206,23 @@ function fetch_application_status_description($status_shortcode=''){
 	return $result->status_description; 
 
 }
+
+
+
+// added by debaleena 31-07-2024////////
+
+// function get_upload_extra_doc($app_id = ''){
+// 	global $user;
+// 	$query = db_select('file_managed', 'fm');
+// 	$query->leftJoin('housing_new_allotment_application', 'hna','hna.online_application_id = hoa.online_application_id');
+// 	$query->fields('haupdoc', array());
+// 	if($app_id!=''){
+// 		$query->condition('haupdoc.online_application_id', $app_id, '=');
+// 	}
+// 	return $query->execute();
+		
+// }
+
+
+//////////end/////////
 

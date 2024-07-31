@@ -16,8 +16,8 @@ if($isVal){
 	$common_data = $output[1];
 	$applicant_data = $output[3];
 
-  // echo '<pre>';
-	// print_r($common_data); die('ok');
+  //  echo '<pre>';
+	//  print_r($common_data); die;
 
   if(isset($output[4]))
   $status_description=$output[4];	
@@ -94,6 +94,35 @@ if($isVal){
     <?php		
 			}
     } */
+
+
+      /////added by debaleena 31-07-2024///////////
+
+      if($common_data->status == 'applied' ){ ?>
+
+        <tr><td>
+
+        <?php 
+           
+
+          echo l('Download Extra Supporting Document',$common_data->uri_doc,array('html'=>TRUE,'attributes' => 
+          array('download' => $common_data->uri_doc, 'class' => 'btn bg-dark  px-5 rounded-pill text-white fw-bolder')));
+        ?>
+        
+          
+      </td></tr>
+
+      <tr><td>
+     <?php  } 
+
+
+      ////////end//////////
+
+
+
+
+
+
     if($common_data->status == 'applicant_acceptance' || $common_data->status == 'ddo_verified_2' || $common_data->status == 'housing_sup_approved_2' || $common_data->status == 'applicant_acceptance' || $common_data->status == 'applicant_reject' || $common_data->status == 'ddo_reject_2' || $common_data->status == 'housing_sup_reject_2'){ ?>
       <tr><td>
 

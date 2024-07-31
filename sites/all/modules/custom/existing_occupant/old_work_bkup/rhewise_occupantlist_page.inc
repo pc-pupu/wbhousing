@@ -268,15 +268,22 @@
 			 	$fields[] = '';*/
 			 $fields[] = $data->flat_no;
 			 $fields[] = $data->flat_category;
-			 
+			 $fields[] = $data->flat_status_code;
+
+
+		/*  turned off by debaleena 26-07-2024
 			 if($data->flat_status == 'vacant')
-			 	$fields[] = 'Vacant';
+			 	$fields[] = 'Ready to Allot';
 			 else if($data->flat_status == 'occupied')
 			 	$fields[] = 'Occupied';
 			 else if($data->flat_status == 'abandoned')
 			 	$fields[] = 'Abandoned';
-			 else if($data->flat_status == 'under repair')
-			 	$fields[] = 'Under Repair';
+			 else if($data->flat_status == 'under major repair')
+			 	$fields[] = 'Under Major Repair';
+			 else if($data->flat_status == 'under minor repair')
+			 	$fields[] = 'Under Minor Repair';
+
+		*/
 			 
 			 if($result2->rowCount() > 0) {
 			 	$fields[] = $data2->applicant_name;

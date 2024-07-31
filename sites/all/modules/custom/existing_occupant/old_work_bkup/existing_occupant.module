@@ -250,6 +250,7 @@
 			$query->addField('hd', 'district_name');
 			$query->addField('hb', 'block_name');	
 			$query->addField('hfs', 'flat_status');
+			$query->addField('hfs', 'flat_status_code');
 			$query->addField('hfc', 'flat_category');
 			$query->addField('hfs', 'is_occupied');
 			$query->addField('hft', 'flat_type');

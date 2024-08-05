@@ -13,7 +13,7 @@ global $user, $user_role,$base_path,$base_root;
     </a>
     <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-            <a href="<?= $base_root.$base_path.'dashboard' ?>" class="nav-link active">
+            <a href="<?= $base_root.$base_path.'dashboard' ?>" class="nav-link active#">
                 <i class="fa fa-tachometer" aria-hidden="true"></i>
                 Dashboard
             </a>
@@ -271,4 +271,5 @@ global $user, $user_role,$base_path,$base_root;
             <?= l('<i class="fa fa-sign-out" aria-hidden="true"></i> Logout','/user/logout',array('html' =>true, 'attributes' => array('class' => array('nav-link')))); ?>
         </li>        
     </ul>
+    <img src="<?= $base_root.$base_path ?>sites/all/themes/housingtheme/images/designed-by-nic.png" class="w-100">
 </div>

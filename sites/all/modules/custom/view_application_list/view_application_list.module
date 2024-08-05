@@ -55,7 +55,17 @@
 		'file' => 'new_application_approve_form.inc',
 		'access arguments' => array('administer approve applicaion'),
 	);
+
+	$items['reject-application'] = array(
+		'title' => 'Reject Application',
+		'page callback' => 'reject_application',
+		'page arguments' => array(1,2),
+		'access arguments' => array('administer approve applicaion'),
+	);
 	//debolina end
+
+
+
 
     return $items;
   }
@@ -145,7 +155,7 @@
 	}	
 	function view_app_detail_page($app_id = '',$page_status='',$status='') {
 		global $base_path, $base_root;
-		//echo decrypt_url($status);die;
+		// echo decrypt_url($status);die;
 		$app_id = decrypt_url($app_id);
 		//echo $app_id;die;
 		if(is_numeric($app_id) && $app_id > 0) {
@@ -218,16 +228,9 @@
 					$output['doc']['current_pay_slip_url'] = $output['doc']['current_pay_slip_fname'] = '';
 				}
 
-
-				//added by debaleena 31-07-2024
-
-				//$fetch_extra_doc = get_upload_extra_doc($app_id);
-
-				////end/////
-
 			}
 		}
-		//print($page_status);die;
+		// print($page_status);die;
 		return theme('view_application_detail_template', array('output' => $output,'page_status'=>$page_status));
 	}
 function update_page($app_id = 0, $status_new = '', $status = '', $entity = '') {
@@ -277,6 +280,7 @@ function view_application_list_theme() {
 
 /*update status*/
 function update_status($app_id = '', $status = '') {
+	// echo $status;die;
 	global $user;	
 	db_update('housing_online_application')
 	->fields(array(
@@ -904,9 +908,10 @@ function application_list_fetch($entity = '',$status = ''){
 }
 
 function application_list_fetch_for_verified_reject($entity = '',$status = ''){
-	//echo $entity;$status;die;
+	// echo $entity;
+	// echo $status;die;
 	global $user, $user_role;
-
+	// echo $user->uid;die;
 		// $query = db_select('housing_process_flow', 'hpf');
 		// $query->addField('hpf', 'status_id');
 		// $query->addField('hpf', 'short_code');
@@ -1083,16 +1088,19 @@ function application_list_fetch_for_verified_reject($entity = '',$status = ''){
 			$query->orderBy('online_application_id','ASC');
 		}
 		
-	
+		// echo $query;die;
 		//$query = $query->extend('PagerDefault')->limit(10);
 		//$a=$query->execute();print_r($a);die;
 		return $query->execute();
+	// 	$result = $query->execute();  
+	// $result = $result->fetchObject();
+	// echo "<pre>";print_r($result);die;	
 
 }
 
 function fetch_application_detail_verified_reject_list($online_application_id = 0,$status=''){
 
-	//echo'ss';die;
+	// echo $status;die;
 		global $user;
 		$query = db_select('housing_applicant_official_detail', 'haod');
 		$query->innerJoin('housing_online_application', 'hoa',
@@ -1174,6 +1182,10 @@ function fetch_application_detail_verified_reject_list($online_application_id = 
 		$query->addField('fm_cs', 'uri', 'uri_cs');
 		$query->addField('fm_licence', 'uri', 'uri_licence');
 
+		if($status == 'housing_sup_reject_1' || $status == 'housing_official_reject' || $status == 'housing_sup_reject_2')
+		{
+			$query->addField('hpf','remarks');
+		}
 
 
 		$query->addField('hpf','created_at');
@@ -1181,6 +1193,9 @@ function fetch_application_detail_verified_reject_list($online_application_id = 
 		$query->condition('hpf.uid', $user->uid, '=');
 		$query->condition('hoa.online_application_id', $online_application_id, '=');
 		$query->condition('hpf.short_code', $status, '=');
+
+		
+	
 
 
 		$query->orderBy('hoa.online_application_id', 'ASC');
@@ -1207,21 +1222,55 @@ function fetch_application_status_description($status_shortcode=''){
 
 }
 
+/*    added by debaleena 02-08-2024 */
 
-
-// added by debaleena 31-07-2024////////
-
-// function get_upload_extra_doc($app_id = ''){
-// 	global $user;
-// 	$query = db_select('file_managed', 'fm');
-// 	$query->leftJoin('housing_new_allotment_application', 'hna','hna.online_application_id = hoa.online_application_id');
-// 	$query->fields('haupdoc', array());
-// 	if($app_id!=''){
-// 		$query->condition('haupdoc.online_application_id', $app_id, '=');
-// 	}
-// 	return $query->execute();
+function reject_application($online_application_id = '', $rejected_status = ''){
+	global $user;
+	
+	$online_application_id = decrypt_url($online_application_id);
+	$reject_status = decrypt_url($rejected_status);
+	
 		
-// }
+	db_update('housing_online_application')
+	->fields(array(
+		'status' => $reject_status,
+		'date_of_verified' => date('Y-m-d'),
+		)
+	)
+	->condition('online_application_id',$online_application_id, '=')
+	->execute();
+
+	$remarks = $_POST['reject_remarks'];
+
+
+	$query = db_select('housing_allotment_status_master', 'hasm');
+	$query->addField('hasm', 'status_id');
+	$query->condition('hasm.short_code', $reject_status);
+	$result = $query->execute();
+	$result = $result->fetchObject();
+	
+
+	$ins_arr = array(
+		'online_application_id'=>$online_application_id,
+		'status_id' => $result->status_id,
+		'created_at' => date('Y-m-d H:i:s'),
+		'uid' => $user->uid,
+		'short_code' => $reject_status,
+		'remarks' => $remarks
+	);
+
+	db_insert('housing_process_flow')->fields($ins_arr)->execute();
+	
+
+	drupal_set_message(t('Application Rejected successfully.'));
+    drupal_goto('dashboard');
+	
+	// redirect to link with proper parameter
+
+	//drupal_got_to('update_status/'.encrypt_url($data->online_application_id).'/'.encrypt_url($reject_status).'/'.encrypt_url($status).'/'.encrypt_url($entity));
+}
+
+
 
 
 //////////end/////////

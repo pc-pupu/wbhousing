@@ -244,7 +244,7 @@
 					
 					$online_app_arr_upd = array();
 					$online_app_arr_upd['application_no']  = 'NA-'.implode(array_reverse(explode('-', $doa))).'-'.$data2->oid;
-						
+					// echo 	$online_app_arr_upd['application_no'];die;
 					db_update('housing_online_application')
 					->fields($online_app_arr_upd)
 					->condition('online_application_id', $data2->oid)

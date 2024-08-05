@@ -151,7 +151,22 @@
    
    /*add into housing_online_application*/
    function add_online_application($status,$app_type,$form,&$form_state){
-	   	
+	   	$reason = $form_state['values']['reason'];
+		if($reason == 'General'){
+			$reason = 'GEN';
+		}else if($reason == 'Single Earning Lady'){
+			$reason = 'SEL';
+		}else if($reason == 'Transfer'){
+			$reason = 'TRN';
+		}else if($reason == 'Recommended'){
+			$reason = 'RCM';
+		}else if($reason == 'Legal Heir'){
+			$reason = 'LGH';
+		}else if($reason == 'Physically Handicaped or Serious Illness'){
+			$reason = 'PHI';
+		}
+
+
 		update_applicant_personal_detail($form, $form_state);
 		
 		global $user;
@@ -171,7 +186,7 @@
 		$online_app_arr['applicant_official_detail_id']  =  $applicant_official_detail_id;
 		$online_app_arr['status']  =  trim($status);
 		
-		$online_app_arr['application_no'] = $app_type;
+		$online_app_arr['application_no'] = $app_type.'-'.$reason;
 		//echo "<pre>";print_r($online_app_arr);die;
 		if($app_type == 'NA' && $comp_serial_no != '') {
 			$online_app_arr['computer_serial_no'] = $comp_serial_no;

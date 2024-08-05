@@ -25,7 +25,7 @@ if($isVal){
 	$filename = str_replace( ' ', '', $entityType );
 	
     //echo l('<img height="18" width="18" src="../'.drupal_get_path('module', 'application_list').'/images/pdf_icon.png" title="Download Application" alt="PDF Icon">Download Application', 'application-pdf-gen/'.encrypt_url($common_data->online_application_id).'/App_Details_'.$common_data->application_no, array('html'=>TRUE, 'attributes' => array('target' => '_blank', 'style' => 'color: #0090C7;font-weight: 400;text-decoration: none; font-size:14px')));
-    echo l('View Details','application-pdf-gen/'.encrypt_url($common_data->online_application_id).'/App_Details_'.$common_data->application_no,array('html'=>TRUE,'attributes' => array('target' => '_blank','class' => 'btn bg-primary px-5 rounded-pill text-white fw-bolder mb-2')));//sd 21-06-2024  
+    echo l('Download Details','application-pdf-gen/'.encrypt_url($common_data->online_application_id).'/App_Details_'.$common_data->application_no,array('html'=>TRUE,'attributes' => array('target' => '_blank','class' => 'btn bg-primary px-6 rounded-pill text-white fw-bolder mb-2 fa fa-download')));//sd 21-06-2024  
   ?>
            
 </div>

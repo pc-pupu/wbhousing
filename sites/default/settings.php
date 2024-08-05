@@ -255,7 +255,7 @@ $databases = array (
       'username' => 'postgres',
       'password' => 'postgres',
       'host' => 'localhost',
-      'port' => '5432',
+      'port' => '5433',
       'driver' => 'pgsql',
       'prefix' => '',
     ),

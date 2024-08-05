@@ -24,8 +24,28 @@ jQuery(document).ready(function() {
 	    return false;
       }	
 	});
+
+
+	/*   added by debaleena 01-08-2024 */
+	jQuery("#edit-confirm-computer-serial-no").keyup(function (e)  
+	{ 
+		//alert("confirm");
+		let compSerialNo = jQuery("#edit-computer-serial-no").val();
+		let conCompSerialNo = jQuery("#edit-confirm-computer-serial-no").val();
+		var messageDiv = jQuery('#comp_ser_no_message');
+
+		if(compSerialNo !== conCompSerialNo){
+			messageDiv.text('**Computer Serial No. and Confirm Computer Serial No. do not Match.').css('color', 'red');
+		}
+		else{
+			messageDiv.text('**Computer Serial No. and Confirm Computer Serial No. are Matched.').css('color', 'green');
+		}
+	});
 	
 });
+
+
+/*  end  *//////
 
 jQuery(document).ready(function(){
 		jQuery("#edit-dob").datepicker({

@@ -79,7 +79,7 @@ function get_vacancy_applicant($allotment_type, $district_code = 0) {
 	$report_table = '<table class="allotment table table-list">
 		<tr>
 			<th rowspan="2">Housing</th>
-			<th colspan="12">No. of Vacancy</th>
+			<th colspan="8">No. of Vacancy</th>
 			<th colspan="3">No. of Applicant</th>
 		</tr>
 		<tr>
@@ -106,9 +106,10 @@ function get_vacancy_applicant($allotment_type, $district_code = 0) {
 					$applicant_new = get_no_of_applicant_new($allotment_type);
 					$rowspan = $total_record;
 				}
+				//echo $rowspan;die;
 				
 				$applicant_total = $applicant_vs + $applicant_cs + $applicant_new;				
-				
+				// echo $applicant_total;die;
 				if($counter == 1) {
 					$report_table .= '<tr>
 						<td>' . $record -> estate_name . '</td>
@@ -139,6 +140,7 @@ function get_vacancy_applicant($allotment_type, $district_code = 0) {
 						<td>' . $record -> floor_top . '</td>
 						<td>' . $applicant_vs . '</td>
 						<td>' . $applicant_cs . '</td>
+						
 					</tr>';
 				}	
 				$counter++;			

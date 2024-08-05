@@ -127,7 +127,8 @@ function user_sso_login($form, &$form_state, $userHRMSID)
                 // Rethrow the exception for the calling code.
                 //throw $e;
                 watchdog_exception('sso_login_reg', $e);
-                drupal_set_message(t($e) , 'error');
+                // drupal_set_message(t($e) , 'error');
+                drupal_set_message(t('Something went wrong! Please contact administration.') , 'error');
             }
         }
         else

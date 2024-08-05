@@ -45,6 +45,11 @@
 			autoSize: true
 		});	
 	});
+
+
+	jQuery("#edit-confirm-computer-serial-no").change(function(){
+		alert("The text has been changed.");
+	  });
 	
 	
 	
@@ -149,7 +154,8 @@
 			"rhe_flat_type":["Flat TYPE","flatType"],
 			"reason":["Allotment Category", "selectBox"],
 			"doa":["Date of Application", "date"],
-			"computer_serial_no":["Computer Serial No", "alphaNumeric"],
+			"computer_serial_no":["Computer Serial No", "onlyNo"],
+			"confirm_computer_serial_no":["Confirm Computer Serial No", "onlyNo"],
 			
 			"remarks":["Remarks", "textAreaEA"]
 			

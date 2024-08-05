@@ -17,7 +17,7 @@ if($isVal){
 	$applicant_data = $output[3];
 
   //  echo '<pre>';
-	//  print_r($common_data); die;
+	//  print_r($output); die;
 
   if(isset($output[4]))
   $status_description=$output[4];	
@@ -57,11 +57,12 @@ if($isVal){
           echo l('Download Signed Application Form',$download_path.$path,array('html'=>TRUE,'attributes' => array('download' => $custom_file_name, 'class' => 'btn bg-dark  px-5 rounded-pill text-white fw-bolder ')));//sd 21-06-2024
     	   ?>
         </td>
+        </tr>
+      <tr>
       <?php
   		}
   	 ?>
-    	</tr>
-      <tr>
+    	
     <?php
 ////////// code off by debaleena/////
 
@@ -98,15 +99,16 @@ if($isVal){
 
       /////added by debaleena 31-07-2024///////////
 
-      if($common_data->status == 'applied' ){ ?>
+      if($common_data->status == 'applied' || $common_data->status == 'ddo_verified_1' || $common_data->status == 'housing_sup_approved_1'
+      || $common_data->status == 'allotted' || $common_data->status == 'ddo_verified_2' || $common_data->status == 'applicant_acceptance'){ ?>
 
         <tr><td>
 
         <?php 
-           
-
-          echo l('Download Extra Supporting Document',$common_data->uri_doc,array('html'=>TRUE,'attributes' => 
-          array('download' => $common_data->uri_doc, 'class' => 'btn bg-dark  px-5 rounded-pill text-white fw-bolder')));
+           if($common_data->uri_extra_doc != ''){
+            echo l('Download Allotment Reason Supporting Document',$base_root.$base_path.'sites/default/files/doc/extra_doc'.$common_data->uid.'/'.$common_data->uri_extra_doc,array('html'=>TRUE,'attributes' => 
+            array('download' => $common_data->uri_extra_doc, 'class' => 'btn bg-dark  px-5 fa fa-download rounded-pill text-white fw-bolder', 'style' => 'font-size:18px')));
+           }
         ?>
         
           
@@ -197,13 +199,14 @@ if($isVal){
 
 	?>
                 </td>
+                </tr>
+        </table>
+    </div>
     <?php
 			}			
 		}
 	?>
-    		</tr>
-        </table>
-    </div>
+    	
 
 <div class="table-bottom">
   <table class="table table-list"><!-- sd 21-06-2024-->
@@ -493,8 +496,49 @@ if($isVal){
 
         <?php $l++; }$l = 0;
 
-      } ?>
+      } 
+      
+      
+      if(isset($common_data->remarks)){
+        ?>
+
+    <th colspan="2" style="background: none repeat scroll 0 0 #473a39;color:white;text-align: center;font-size: 18px;line-height: 24px;font-weight: 
+    normal;font-family: 'Dosis',Arial,Verdana,serif;" class="first">Application Rejection Remarks</th>
+      </tr>
+        <tr>
+          <th style="background-color:#00000000">Rejection Remarks</th>
+          <td><?php echo $common_data->remarks;?></td>
+        </tr>
+      
+    <?php  }
+      $uri = $_SERVER["REQUEST_URI"]; 
+      $uriArray = explode('/', $uri);
+      $reject_uri = end($uriArray);
+      $rejected_status = decrypt_url($reject_uri);
+      $rejected_status=trim(preg_replace("/[^ \w]+/", "", $rejected_status));
+      $page_status = $uriArray[5];
+    //  echo $page_status;die;
+     if($rejected_status == 'housing_sup_reject_1' || $rejected_status == 'housing_official_reject' || $rejected_status == 'housing_sup_reject_2') {
+      if($page_status == 'action-list'){?>
   </table>
+  <table class="table table-list">
+  <tr class="">
+        <th colspan="2" style="background: none repeat scroll 0 0 #cb3232;color:white;text-align: center;font-size: 18px;line-height: 24px;font-weight: normal;font-family: 'Dosis',Arial,Verdana,serif;" class="first">Remarks for Rejection</th>
+      </tr>
+      <tr colspan="2">
+        <td class="row text-center">
+          <form action="<?php echo $base_root.$base_path.'reject-application'.'/'.encrypt_url($common_data->online_application_id).'/'.$reject_uri;?>" class="" method="post">
+            <textarea name="reject_remarks" id="reject_remarks" class="col-md-12" rows="4"></textarea>
+            <button type="submit" class="btn bg-success btn-sm px-5 mt-4 rounded-pill text-white fw-bolder" value="Submit" onclick="return confirm('Are you sure you want to reject?')">Reject</button>
+         
+          </td>
+          
+          
+          </form>
+      </tr>
+  </table>
+  <?php } 
+  } ?>
 </div>
 
 <?php

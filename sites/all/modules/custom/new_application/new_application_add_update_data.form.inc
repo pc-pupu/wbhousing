@@ -144,7 +144,7 @@
 			}
 		}
 		
-		if(trim($form['allotment_reason']['reason']['#value']) == 'Transfer' || trim($form['allotment_reason']['reason']['#value']) == 'Physically Handicaped Or Serious Illness' || trim($form['allotment_reason']['reason']['#value']) == 'Officer on Transfer having earmarked Bungalow or Quater in their immediate previous posting') {
+		if(trim($form['allotment_reason']['reason']['#value']) == 'Transfer' || trim($form['allotment_reason']['reason']['#value']) == 'Physically Handicaped Or Serious Illness' || trim($form['allotment_reason']['reason']['#value']) == 'Recommended' || trim($form['allotment_reason']['reason']['#value']) == 'Single Earning Lady' || trim($form['allotment_reason']['reason']['#value']) == 'Legal Heir') {
 			
 			if($form_state['values']['extra_doc'] != 0){
 				// file exists

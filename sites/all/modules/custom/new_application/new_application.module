@@ -496,7 +496,7 @@ function new_application_form_application_form_alter(&$form, &$form_state, $form
                 ) ,
                 //'file_validated_size' => array(MAX_FILE_SIZE*1024*1024),
             ) ,
-            '#upload_location' => 'public://doc/',
+            '#upload_location' => 'public://doc/extra_doc/',
             //'#required' => TRUE,
             //'#validated' => TRUE,
             '#prefix' => '<div id="extra_doc">',

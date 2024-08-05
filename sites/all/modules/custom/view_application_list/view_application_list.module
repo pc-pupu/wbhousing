@@ -1270,6 +1270,8 @@ function reject_application($online_application_id = '', $rejected_status = ''){
 	//drupal_got_to('update_status/'.encrypt_url($data->online_application_id).'/'.encrypt_url($reject_status).'/'.encrypt_url($status).'/'.encrypt_url($entity));
 }
 
+// before creating local branch
+
 
 
 

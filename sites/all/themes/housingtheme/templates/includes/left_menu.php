@@ -19,6 +19,16 @@ global $user, $user_role,$base_path,$base_root;
             </a>
         </li>
 
+       <?php if($user_role == 10 || $user_role == 6){ ?>
+        <li class="nav-item">
+            <a href="<?= $base_root.$base_path.'application_status_check' ?>" class="nav-link active#">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                Search Application Details
+            </a>
+        </li>
+        <?php }?>
+
+
         <?php
             if($user_role == 10 || $user_role == 11 || $user_role == 6){
                 if($user_role == 11){

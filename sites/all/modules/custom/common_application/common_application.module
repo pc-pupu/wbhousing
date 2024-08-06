@@ -450,7 +450,7 @@
 		'#prefix' => '<div class="col-md-4"><div class="form-floating">',
 		'#suffix' => '</div></div>',
 		//'#element_validate' => array('element_validate_alphabatic_text'),
-		'#attributes' => array('oninput'=>"this.value=this.value.toUpperCase()", 'class' => array('numeric_positive form-control')), 
+		'#attributes' => array('oninput'=>"this.value=this.value.toUpperCase()", 'class' => array('form-control')), 
 		
 	); 
 	$form['official_info']['app_headquarter'] = array(
@@ -460,7 +460,7 @@
 		'#prefix' => '<div class="col-md-4"><div class="form-floating">',
 		'#suffix' => '</div></div></div>',
 		'#element_validate' => array('element_validate_alphabatic_text'),
-		'#attributes' => array('oninput'=>"this.value=this.value.toUpperCase()", 'class' => array('numeric_positive form-control')), 
+		'#attributes' => array('oninput'=>"this.value=this.value.toUpperCase()", 'class' => array('form-control')), 
 		
 	);
 	$form['official_info']['doj'] = array(

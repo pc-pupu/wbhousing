@@ -251,11 +251,11 @@ $databases = array (
   array (
     'default' => 
     array (
-      'database' => 'wbhousing_demo',
+      'database' => 'wbhousing',
       'username' => 'postgres',
       'password' => 'postgres',
       'host' => 'localhost',
-      'port' => '5433',
+      'port' => '5434',
       'driver' => 'pgsql',
       'prefix' => '',
     ),

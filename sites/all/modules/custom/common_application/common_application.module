@@ -61,8 +61,55 @@
 			'page arguments' => array(1),
 			'access arguments' => array('access content'),
 		);
+
+
+		$items['show-qr'] = array(
+			'title' => 'show-qr',	
+			'page callback' => 'show_qr',
+			'page arguments' => array(1),
+			'access arguments' => array('access content'),
+		);
+
 		return $items;
   	}
+
+	function show_qr(){
+		/***** Generation of QR Code **************/
+	
+	// echo $PNG_TEMP_DIR 			= drupal_get_path('module', '/custom/phpqrcode').'/upload/license_qr_code/';
+	// echo $PNG_WEB_DIR 			= drupal_get_path('module', './custom/phpqrcode').'/upload/license_qr_code/';
+	
+	$PNG_TEMP_DIR			= "./sites/all/modules/custom/common_application/phpqrcode/upload/license_qr_code/";
+	$PNG_WEB_DIR			= "./sites/all/modules/custom/common_application/phpqrcode/upload/license_qr_code/";
+
+
+
+	include "./sites/all/modules/custom/common_application/phpqrcode/qrlib.php";
+	
+	if (!file_exists($PNG_TEMP_DIR))
+		mkdir($PNG_TEMP_DIR);
+		
+	$filename 				= $PNG_TEMP_DIR.'test.png';
+	$errorCorrectionLevel 	= 'H';
+	$matrixPointSize 		= 2;
+	
+	
+	
+	
+	$qr_content 			= 'Check For QR';
+	
+	
+	$filename				= $PNG_TEMP_DIR.time().'.png';
+	
+	QRcode::png($qr_content, $filename, $errorCorrectionLevel, $matrixPointSize, 4); 
+	
+	$generate_qr_image 		= $PNG_WEB_DIR.basename($filename);
+	
+	echo $qr_image = '<img src="'.'./sites/all/modules/custom/common_application/phpqrcode/upload/license_qr_code/'.basename($filename).'" style="margin-top:20px;">'; die;
+	
+	/***** Generation of QR Code Ends**************/
+	
+	}
     
 	function application_status_page($status = '') {
 		if(!empty($status))

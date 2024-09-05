@@ -1,13 +1,13 @@
 <?php
 	//debolina start
 	function application_form_upload1($form, &$form_state, $online_application_id, $status_new = '', $status = '', $entity = '') {
-		
+		// echo "ppp";die;
 		global $user,$user_role;
 		$online_application_id = decrypt_url($online_application_id);
 		$status_new = decrypt_url($status_new);
 		$status = decrypt_url($status);
 		$entity = decrypt_url($entity);
-		//echo $online_application_id,$status_new,$status,$entity;die;
+		// echo $online_application_id,$status_new,$status,$entity;die;
 		//print_r($user);die;
 		$application_form_arr = array(
 			'status' => $status_new,
@@ -15,7 +15,7 @@
 		);
 
 
-		//echo "<pre>";print_r($application_form_arr);die;
+		// echo "<pre>";print_r($application_form_arr);die;
 		$query = db_select('housing_allotment_status_master', 'hasm');
 		$query->addField('hasm', 'status_id');
 		$query->addField('hasm', 'short_code');
@@ -24,7 +24,7 @@
 		$data = $result->fetchObject();
 		
 		$short_code_status = $data->status_id; 
-		//echo $short_code_status;die;
+		// echo $short_code_status;die;
 
 						
 		$process_flow_arr = array('online_application_id' => $online_application_id,
@@ -34,7 +34,7 @@
 								  'short_code' =>$data->short_code
 								);
 
-
+		// echo "<pre>";print_r($process_flow_arr);die;
 		
 		if($online_application_id != 0) {
 
@@ -42,6 +42,7 @@
 
 			if($status == 'allotted')
 			{
+				// echo "pp";die;
 				$update_date = array(
 									'allotment_approve_or_reject_date' => date('Y-m-d H:i:s')
 								);

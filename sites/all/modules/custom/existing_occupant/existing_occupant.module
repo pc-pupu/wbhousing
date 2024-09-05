@@ -366,23 +366,26 @@
 			$query->innerJoin('users_roles', 'ur', 'ur.uid = u.uid');
 			$query->innerJoin('housing_applicant', 'ha', 'ha.uid = u.uid');
 			$query->innerJoin('housing_applicant_official_detail', 'haod', 'haod.uid = u.uid');
-			$query->innerJoin('housing_pay_band', 'hpb', 'hpb.pay_band_id = haod.pay_band_id');
+			//$query->innerJoin('housing_pay_band', 'hpb', 'hpb.pay_band_id = haod.pay_band_id');
+			$query->innerJoin('housing_pay_band_categories', 'hpbc', 'hpbc.pay_band_id = haod.pay_band_id'); //debaleena 29-08-2024
 			$query->innerJoin('housing_ddo', 'hddo', 'hddo.ddo_id = haod.ddo_id');
 			$query->innerJoin('housing_district', 'hd', 'hd.district_code = hddo.district_code');
 			$query->innerJoin('housing_online_application', 'hoa', 'hoa.applicant_official_detail_id = haod.applicant_official_detail_id');
 			$query->innerJoin('housing_new_allotment_application', 'hnaa', 'hnaa.online_application_id = hoa.online_application_id');
 			$query->innerJoin('housing_flat_occupant', 'hfo', 'hfo.online_application_id = hoa.online_application_id');
+			$query->innerJoin('housing_flat_type', 'hft', 'hft.flat_type_id = hnaa.flat_type_id');
 			$query->fields('u');
 			$query->addField('u', 'status', 'user_status');
 			$query->fields('ur');
 			$query->fields('ha');
 			$query->fields('haod');
-			$query->fields('hpb');
+			$query->fields('hpbc');
 			$query->fields('hddo');
 			$query->fields('hd');
 			$query->fields('hoa');
 			$query->fields('hnaa');
 			$query->fields('hfo');
+			$query->addField('hft','flat_type');
 			$db_and = db_and();
 			$db_and->condition('hoa.online_application_id', $online_app_id, '=');
 			$db_and->condition('ur.rid', 5, '=');

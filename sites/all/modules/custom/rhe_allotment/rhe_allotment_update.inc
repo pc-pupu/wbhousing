@@ -272,8 +272,8 @@ function get_applicant($estate_id, $flat_type_id, $shifting_type) {
     $result = db_query("select hoa.online_application_id, hca.flat_type_id, hca.occupation_estate, hca.occupation_flat from {housing_online_application} as hoa
     inner join {housing_applicant_official_detail} as haod on haod.applicant_official_detail_id = hoa.applicant_official_detail_id
     inner join {" . $shifting_applicant_table[$shifting_type] . "} as hca on hca.online_application_id = hoa.online_application_id
-    where hoa.status = 'housing_sup_approved_1' and hca.occupation_estate = $estate_id and hca.flat_type_id = $flat_type_id
-    order by hoa.online_application_id ASC limit 1"); //before(done by prasenjit)
+    where hoa.status = 'housing_approver_approved' and hca.occupation_estate = $estate_id and hca.flat_type_id = $flat_type_id
+    order by hoa.online_application_id ASC limit 1"); //before(done by prasenjit)   housing_sup_approved_1 to housing_approver_approved by debaleena 04-09-2024
     //order by hoa.computer_serial_no ASC limit 1");// after (done by Moumita)
 
     return $result;
@@ -352,13 +352,13 @@ function get_applicant_new($flat_type_id, $next_roaster_counter) {
     
     $result = db_query("select * from housing_online_application as t1
     INNER JOIN housing_new_allotment_application as t2 on t1.online_application_id = t2.online_application_id
-    WHERE t1.status = 'housing_sup_approved_1'
+    WHERE t1.status = 'housing_approver_approved'  
     and t2.flat_type_id = " . $flat_type_id . "
     and t2.allotment_category = (select category from " . $roaster_tbl . " where counter = " . $next_roaster_counter . ")
     ORDER BY t1.computer_serial_no ASC
     limit 1");
     // ORDER BY t1.online_application_id ASC
-
+    // housing_sup_approved_1 to housing_approver_approved by debaleena 04-09-2024
     return $result;
 }
 function get_next_allotment_process_no($allotment_type) {

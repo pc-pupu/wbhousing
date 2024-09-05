@@ -1,6 +1,6 @@
 <?php 
 global $base_root, $base_path, $user_role;
-//echo "<pre>";print_r($output);die;
+// echo "<pre>";print_r($output);die;
 if(isset($output['page_status'])){
 	$page_status=$output['page_status'];
 }else{
@@ -16,10 +16,10 @@ $options1['html'] = TRUE;
 if($status == 'applied'){
 	drupal_set_title('New Application List');
 }
-else if($status == 'ddo_verified_1'||$status == 'ddo_verified_2'||$status=='housing_sup_approved_1'||$status=='housing_official_approved'||$status=='housing_sup_approved_2'){
+else if($status == 'ddo_verified_1'||$status == 'ddo_verified_2'||$status=='housing_sup_approved_1'||$status=='housing_official_approved'||$status=='housing_sup_approved_2'||$status=='housing_approver_approved'){
 	drupal_set_title('Verified Application List');
 }
-else if($status == 'ddo_rejected_1'||$status == 'ddo_rejected_2'||$status=='housing_sup_reject_1'||$status=='housing_official_rejected'||$status=='housing_sup_reject_2'){
+else if($status == 'ddo_rejected_1'||$status == 'ddo_rejected_2'||$status=='housing_sup_reject_1'||$status=='housing_official_rejected'||$status=='housing_sup_reject_2'||$status=='housing_approver_reject'){
 	drupal_set_title('Rejected Application List');
 }
 
@@ -38,6 +38,11 @@ if($user_role == 11 && $status == 'applied'){
 	$next_status_app = 'housing_sup_approved_1';
 	$next_status_rej = 'housing_sup_reject_1';
 
+}else if($user_role == 13 && $status == 'housing_sup_approved_1'){    //added by debaleena 04-09-2024
+	$new_status = 'housing_sup_approved_1';
+	$next_status_app = 'housing_approver_approved';
+	$next_status_rej = 'housing_approver_reject';
+
 }else if($user_role == 10 && $status == 'ddo_verified_2'){
 	$new_status = 'ddo_verified_2';
 	$next_status_app = 'housing_sup_approved_2';
@@ -48,9 +53,11 @@ if($user_role == 11 && $status == 'applied'){
 	$next_status_app = 'housing_official_approved';
 	$next_status_rej = 'housing_official_reject';
 }
-
-
-
+//$a = encrypt_url($next_status_app); 
+// $a = 'nby2v8innpiZoKW%2FsMLEq5aaqKCnvLexww%3D%3D';
+//echo encrypt_url($a);
+// echo decrypt_url($a);die;
+//echo $url;echo $new_status;die;
 
 ?>
 
@@ -80,6 +87,7 @@ if($user_role == 11 && $status == 'applied'){
 				<span class="counter"><?=$output['cs-verified'] ?></span>
 			<?php }?>	
 			<p>Verified List</p>
+			
 			<a href="<?= $base_root.$base_path.'view_application/'.encrypt_url($next_status_app).'/'.encrypt_url($url).'/'.'verified-list' ?>" class="badge rounded-pill text-bg-success">View Details</a>
 			<img src="<?= $base_root.$base_path ?>sites/all/themes/housingtheme/images/floor-icon.png" class="position-absolute end-0 counter-box-icon top-0" />
 		</div>

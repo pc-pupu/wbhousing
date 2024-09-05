@@ -100,21 +100,22 @@ if($isVal){
       /////added by debaleena 31-07-2024///////////
 
       if($common_data->status == 'applied' || $common_data->status == 'ddo_verified_1' || $common_data->status == 'housing_sup_approved_1'
-      || $common_data->status == 'allotted' || $common_data->status == 'ddo_verified_2' || $common_data->status == 'applicant_acceptance'){ ?>
+      || $common_data->status == 'allotted' || $common_data->status == 'ddo_verified_2' || $common_data->status == 'applicant_acceptance' || 
+      $common_data->status == 'housing_sup_approved_2' || $common_data->status == 'license_generate' || $common_data->status == 'housing_approver_approved'){ ?>
 
-        <tr><td>
+        
 
         <?php 
            if($common_data->uri_extra_doc != ''){
             echo l('Download Allotment Reason Supporting Document',$base_root.$base_path.'sites/default/files/doc/extra_doc'.$common_data->uid.'/'.$common_data->uri_extra_doc,array('html'=>TRUE,'attributes' => 
-            array('download' => $common_data->uri_extra_doc, 'class' => 'btn bg-dark  px-5 fa fa-download rounded-pill text-white fw-bolder', 'style' => 'font-size:18px')));
+            array('download' => $common_data->uri_extra_doc, 'class' => 'btn bg-dark  px-10 fa fa-download rounded-pill text-white fw-bolder', 'style' => 'font-size:18px')));
            }
         ?>
         
           
-      </td></tr>
+     
 
-      <tr><td>
+      
      <?php  } 
 
 
@@ -122,35 +123,41 @@ if($isVal){
 
 
 
+    //  echo  $common_data->short_code;die;
 
-
-
-    if($common_data->status == 'applicant_acceptance' || $common_data->status == 'ddo_verified_2' || $common_data->status == 'housing_sup_approved_2' || $common_data->status == 'applicant_acceptance' || $common_data->status == 'applicant_reject' || $common_data->status == 'ddo_reject_2' || $common_data->status == 'housing_sup_reject_2'){ ?>
-      <tr><td>
+    if($page_status=='action-list'){
+      $status_for_ddo_osd = $common_data->status;
+    }else{
+      $status_for_ddo_osd = $common_data->short_code;
+    }
+    //if($common_data->status == 'applicant_acceptance' || $common_data->status == 'ddo_verified_2' || $common_data->status == 'housing_sup_approved_2' || $common_data->status == 'applicant_reject' || $common_data->status == 'ddo_reject_2' || $common_data->status == 'housing_sup_reject_2' || $common_data->status == 'license_generate'){ 
+    ///////////debaleena 09-08-2024/////
+     if(isset($status_for_ddo_osd) && ($status_for_ddo_osd == 'applicant_acceptance' || $status_for_ddo_osd == 'ddo_verified_2' || $status_for_ddo_osd == 'housing_sup_approved_2' || $status_for_ddo_osd == 'applicant_reject' || $status_for_ddo_osd == 'ddo_reject_2' || $status_for_ddo_osd == 'housing_sup_reject_2' || $status_for_ddo_osd == 'license_generate')){
+      // if(isset($output['latest_short_code']) && $output['latest_short_code'] == 'applicant_acceptance' || $output['latest_short_code'] == 'ddo_verified_2' || $output['latest_short_code'] == 'housing_sup_approved_2' || $output['latest_short_code'] == 'ddo_reject_2' ||
+      // $output['latest_short_code'] == 'housing_sup_reject_2' || $output['latest_short_code'] == 'license_generate'){
+      
+      ?>
+      <td>
 
         <?php 
             // echo l('<img height="30" width="30" src="'.$base_path.drupal_get_path('module', 'application_of_registration_list').'/images/download_icon.png " title="Download Offer Letter" alt="PDF Icon">Uploaded Current Pay Slip',$output['doc']['current_pay_slip_url'],array('html' => true , 'attributes'=> array('download' => $output['doc']['license_application_signed_form_fname'], 'style' => 'color: #0090C7;font-weight: 400;text-decoration: none; font-size:14px'))); //turned odd sd 21-06-2024
 
-          echo l('Uploaded Current Pay Slip',$output['doc']['current_pay_slip_url'],array('html'=>TRUE,'attributes' => array('download' => $output['doc']['license_application_signed_form_fname'], 'class' => 'btn bg-dark  px-5 rounded-pill text-white fw-bolder')));//sd 21-06-2024
+          echo l('Uploaded Current Pay Slip',$output['doc']['current_pay_slip_url'],array('html'=>TRUE,'attributes' => array('download' => $output['doc']['license_application_signed_form_fname'], 'class' => 'btn bg-dark fa fa-download px-10 rounded-pill text-white fw-bolder')));//sd 21-06-2024
         ?>
         
           
-      </td></tr>
-
-      <tr><td>
+      
         <?php 
         // echo l('<img height="30" width="30" src="'.$base_path.drupal_get_path('module', 'application_of_registration_list').'/images/download_icon.png " title="Declaration Form" alt="PDF Icon">Uploaded Declaration Signed Form',$output['doc']['declaration_signed_form_url'],array('html'=>true,'attributes'=>array('download' => $output['doc']['declaration_signed_form_fname'], 'style' => 'color: #0090C7;font-weight: 400;text-decoration: none; font-size:14px'))); // turned off sd 21-06-2024
 
-        echo l('Uploaded Declaration Signed Form',$output['doc']['declaration_signed_form_url'],array('html'=>TRUE,'attributes' => array('download' => $output['doc']['declaration_signed_form_fname'], 'class' => 'btn bg-dark  px-5 rounded-pill text-white fw-bolder')));//sd 21-06-2024
-      ?></td></tr>
-
-      <tr><td>
+        echo l('Uploaded Declaration Signed Form',$output['doc']['declaration_signed_form_url'],array('html'=>TRUE,'attributes' => array('download' => $output['doc']['declaration_signed_form_fname'], 'class' => 'btn bg-dark  fa fa-download px-10 rounded-pill text-white fw-bolder')));//sd 21-06-2024
+      ?>
         <?php 
         // echo l('<img height="30" width="30" src="'.$base_path.drupal_get_path('module', 'application_of_registration_list').'/images/download_icon.png " title="Licence Form" alt="PDF Icon">Uploaded Licence Application Signed Form',$output['doc']['license_application_signed_form_url'],array('html'=>true,'attributes'=>array('download' => $output['doc']['current_pay_slip_fname'], 'style' => 'color: #0090C7;font-weight: 400;text-decoration: none; font-size:14px')));  turned off sd 21-06-2024
 
-        echo l('Uploaded Declaration Signed Form',$output['doc']['license_application_signed_form_url'],array('html'=>TRUE,'attributes' => array('download' => $output['doc']['current_pay_slip_fname'], 'class' => 'btn bg-dark  px-5 rounded-pill text-white fw-bolder')));//sd 21-06-2024
+        echo l('Uploaded Declaration Signed Form',$output['doc']['license_application_signed_form_url'],array('html'=>TRUE,'attributes' => array('download' => $output['doc']['current_pay_slip_fname'], 'class' => 'btn bg-dark  fa fa-download px-10 rounded-pill text-white fw-bolder')));//sd 21-06-2024
 
-      ?></td></tr>
+      ?></td>
 
       <?php
       
@@ -164,7 +171,7 @@ if($isVal){
     <?php					
 		// echo l('<img height="30" width="30" src="../'.drupal_get_path('module', 'view_application_list').'/images/download_icon.png" title="Download Current Licence" alt="PDF Icon">Download Current Licence', $download_path.$path, array('html'=>TRUE, 'attributes' => array('download' => $custom_file_name, 'style' => 'color: #0090C7;font-weight: 400;text-decoration: none; font-size:14px')));//turned off sd 21-06-2024
 
-    echo l('Download Current Licence',$download_path.$path,array('html'=>TRUE,'attributes' => array('download' => $custom_file_name, 'class' => 'btn bg-dark  px-5 rounded-pill text-white fw-bolder')));//sd 21-06-2024
+    echo l(' Download Current Licence',$download_path.$path,array('html'=>TRUE,'attributes' => array('download' => $custom_file_name, 'class' => 'btn bg-dark  px-4 rounded-pill fa fa-download text-white fw-bolder')));//sd 21-06-2024
 	?>
                 </td>
     <?php
@@ -179,7 +186,7 @@ if($isVal){
     <?php					
 		    //echo l('<img height="30" width="30" src="../'.drupal_get_path('module', 'view_application_list').'/images/download_icon.png" title="Download Current Licence" alt="PDF Icon">Download Current Licence', $download_path.$path, array('html'=>TRUE, 'attributes' => array('download' => $custom_file_name, 'style' => 'color: #0090C7;font-weight: 400;text-decoration: none; font-size:14px')));//turned off sd 21-06-2024
 
-      echo l('Download Current Licence',$download_path.$path,array('html'=>TRUE,'attributes' => array('download' => $custom_file_name, 'class' => 'btn bg-dark  px-5 rounded-pill text-white fw-bolder')));//sd 21-06-2024
+      echo l(' Download Current Licence',$download_path.$path,array('html'=>TRUE,'attributes' => array('download' => $custom_file_name, 'class' => 'btn bg-dark  px-4 fa fa-download rounded-pill text-white fw-bolder')));//sd 21-06-2024
 	?>
                 </td>
     <?php

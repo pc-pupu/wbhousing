@@ -8,7 +8,7 @@
 		//print_r($result);die;
 		// get document info
 		$fetchDoc = get_applicant_upload_docs();
-		//print_r($fetchDoc);die;
+		// print_r($fetchDoc);die;
 		
 		if($fetchDoc->rowCount() >0){
 			$doc_arr = $fetchDoc->fetchAllKeyed($key_index = 8, $value_index = 7);
@@ -33,6 +33,7 @@
 		
 		$result1 = fetch_allotment_details();
 		$data1 = $result1->fetchObject();
+		// print_r($data1);die;
 		//$rows = array();
 		//$header = array();
 		$header[] = array('data' => 'Allotment No', 'width' => '20%');
@@ -114,7 +115,9 @@
 			$allotment_approve_or_reject_date = strtotime($data1->allotment_approve_or_reject_date);
 			$final_date = date("Y-m-d", strtotime("+29 days", $allotment_approve_or_reject_date));
 
-			//echo $current_date ; echo $final_date ; echo $data1->accept_reject_status ;die;
+			// echo $current_date ; 
+			// echo $final_date ; die;
+			// echo $data1->accept_reject_status ;die;
 			
 			if($current_date <= $final_date && $data1->accept_reject_status != 'Cancel') {
 				if($data1->accept_reject_status == NULL) {

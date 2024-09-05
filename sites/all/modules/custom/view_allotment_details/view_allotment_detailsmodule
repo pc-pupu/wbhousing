@@ -128,7 +128,7 @@
 			$query->condition($db_and);
 		}
 		
-		//echo $query;die();
+		// echo $query;die();
 		return $query->execute();
 	}
 	

@@ -28,6 +28,10 @@
                     $new_status = 'ddo_verified_1';
                     $next_status_app = 'housing_sup_approved_1';
                     $next_status_rej = 'housing_sup_reject_1';
+                }else if($user_role == 13){
+                    $new_status = 'housing_sup_approved_1';
+                    $next_status_app = 'housing_approver_approved';    //debaleena 04-09-2024
+                    $next_status_rej = 'housing_approver_reject';
                 }else if($user_role == 6){
                     $new_status = 'allotted';
                     $next_status_app = 'housing_official_approved';

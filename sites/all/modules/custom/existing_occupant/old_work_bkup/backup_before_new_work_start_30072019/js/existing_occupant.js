@@ -135,6 +135,8 @@
 			
 			"district":["DDO District", "selectBox"],
 			"designation":["DDO Designation", "selectBox"],
+
+			"dol":["Date of License","date"],
 			
 			//"rhe_flat_type":["Flat TYPE","flatType"],
 			//"reason":["Allotment Category", "selectBox"],

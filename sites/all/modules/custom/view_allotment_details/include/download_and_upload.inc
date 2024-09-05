@@ -5,14 +5,23 @@ function download_and_upload($form, &$form_state, $online_application_id = ''){
 
     // echo decrypt_url($online_application_id); die;
 
+     // Add a new item to the bottom of the form.
+     $form['my_custom_note'] = array(
+        '#type' => 'markup',
+        '#markup' => '<br><div class="row" style="padding-right:20px;"><p style="color: red;">**Note : Please download the Application Form and Declaration Form.You have to 
+        sign these documents and upload duly signed License Application Form,Declaration and Latest Payslip. </p></div>',
+        
+        
+      );
+
     $form['markup_application'] = array(
         '#type' => 'markup',
-        '#markup' => '<br><div class="row" style="padding-right:20px;">'.l('<img height="18" width="18" src="'.$base_path.drupal_get_path('module', 'application_of_registration_list').'/images/download_icon.png" title="Download Application Form" alt="PDF Icon"> Download License Application Form ', 'form-of-application/'.$online_application_id, array('html'=>TRUE, 'attributes' => array('target' => '_blank', 'style' => 'color: #0090C7;font-weight: 400;text-decoration: none; font-size:14px'))).'</div><br>'
+        '#markup' => '<br><div class="row"><div class="col-md-6">'.l('<img height="20" width="20" src="'.$base_path.drupal_get_path('module', 'application_of_registration_list').'/images/download_icon.png" title="Download Application Form" alt="PDF Icon"> Download License Application Form ', 'form-of-application/'.$online_application_id, array('html'=>TRUE, 'attributes' => array('target' => '_blank', 'style' => 'color: #0090C7;font-weight: 400;text-decoration: none; font-size:14px'))).'</div>'
     ); 
 
     $form['markup_declaration'] = array(
         '#type' => 'markup',
-        '#markup' => '<br><div class="row" style="padding-right:20px;">'.l('<img height="18" width="18" src="'.$base_path.drupal_get_path('module', 'application_of_registration_list').'/images/download_icon.png" title="Download Declaration" alt="PDF Icon"> Download Declaration ', 'generate-declaration/'.$online_application_id, array('html'=>TRUE, 'attributes' => array('target' => '_blank', 'style' => 'color: #0090C7;font-weight: 400;text-decoration: none; font-size:14px'))).'</div><br>'
+        '#markup' => '<div class="col-md-6">'.l('<img height="20" width="20" src="'.$base_path.drupal_get_path('module', 'application_of_registration_list').'/images/download_icon.png" title="Download Declaration" alt="PDF Icon"> Download Declaration ', 'generate-declaration/'.$online_application_id, array('html'=>TRUE, 'attributes' => array('target' => '_blank', 'style' => 'color: #0090C7;font-weight: 400;text-decoration: none; font-size:14px'))).'</div></div>'
 
         
     );
@@ -82,14 +91,7 @@ function download_and_upload($form, &$form_state, $online_application_id = ''){
     );
 
 
-     // Add a new item to the bottom of the form.
-     $form['my_custom_note'] = array(
-        '#type' => 'item',
-        '#markup' => '<p style="color: red;">**Note : Please download the Application Form and Declaration Form.You have to 
-        sign these documents and upload duly signed License Application Form,Declaration and Latest Payslip. </p>',
-        '#weight' => 100, // Ensures that it is placed at the bottom.
-        
-      );
+    
     
     return $form;
     

@@ -21,8 +21,8 @@
 									order by grade_pay desc, online_application_id asc", 
 									//array(':status' => 'verified', ':flat_type_id' => $flat_type, ':app_no' => 'NA'));
 									//debaleena start//
-									array(':status' => 'housing_sup_approved_1', ':flat_type_id' => $flat_type, ':app_no' => 'NA'));	
-
+									//array(':status' => 'housing_sup_approved_1', ':flat_type_id' => $flat_type, ':app_no' => 'NA'));	
+									array(':status' => 'housing_approver_approved', ':flat_type_id' => $flat_type, ':app_no' => 'NA'));  //debaleena 04-09-2024
 									//end//	
 			} else {
 				$result = db_query("select applicant_name, hoa.online_application_id, status, application_no, flat_type, 	
@@ -39,8 +39,8 @@
 									order by online_application_id asc", 
 									//array(':status' => 'verified', ':flat_type_id' => $flat_type, ':app_no' => 'NA'));
 									//debaleena start//
-									array(':status' => 'housing_sup_approved_1', ':flat_type_id' => $flat_type, ':app_no' => 'NA'));	
-
+									//array(':status' => 'housing_sup_approved_1', ':flat_type_id' => $flat_type, ':app_no' => 'NA'));	
+									array(':status' => 'housing_approver_approved', ':flat_type_id' => $flat_type, ':app_no' => 'NA'));   //debaleena 04-09-2024
 									//end//
 			}
 		//$data1 = $result->fetchObject();					

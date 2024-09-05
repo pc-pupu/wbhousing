@@ -84,6 +84,18 @@ jQuery(document).ready(function(){
 	});	
 });
 
+jQuery(document).ready(function(){
+	jQuery("#edit-dol").datepicker({
+	dateFormat: "dd/mm/yy",
+	//minDate: minDoj,
+	changeMonth: true,
+	changeYear: true,
+	//yearRange: "-0:+70",
+	//minDate: "0",
+	autoSize: true
+});	
+});
+
 /*jQuery(document).ready(function(){
 	
 	   var dob = jQuery('#edit-dob').val();
@@ -176,7 +188,8 @@ jQuery(document).ready(function(){
 			//"office_phone_no":["Telephone No.", "telephoneNo"],
 			
 			"district":["DDO District", "selectBox"],
-			"designation":["DDO Designation", "selectBox"]
+			"designation":["DDO Designation", "selectBox"],
+			"dol":["Date of License","date"],
 			
 		};
 		

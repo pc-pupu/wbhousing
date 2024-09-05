@@ -234,8 +234,8 @@
 							order by grade_pay desc, online_application_id asc", 
 							//array(':status' => 'verified', ':flat_type_id' => $flat_type_id, ':app_no' => 'NA'));
 							//debaleena start//
-							array(':status' => 'housing_sup_approved_1', ':flat_type_id' => $flat_type_id, ':app_no' => 'NA'));	
-
+							//array(':status' => 'housing_sup_approved_1', ':flat_type_id' => $flat_type_id, ':app_no' => 'NA'));	
+							array(':status' => 'housing_approver_approved', ':flat_type_id' => $flat_type_id, ':app_no' => 'NA'));  //debaleena 04-09-2024
 							//end//
 		} else {
 		
@@ -254,8 +254,8 @@
 							//array(':status' => 'verified', ':flat_type_id' => $flat_type_id, ':app_no' => 'NA'));	
 
 							//debaleena start//
-							array(':status' => 'housing_sup_approved_1', ':flat_type_id' => $flat_type_id, ':app_no' => 'NA'));	
-
+							//array(':status' => 'housing_sup_approved_1', ':flat_type_id' => $flat_type_id, ':app_no' => 'NA'));	
+							array(':status' => 'housing_approver_approved', ':flat_type_id' => $flat_type_id, ':app_no' => 'NA'));   //debaleena 04-09-2024
 							//end//
 		}
 		//print_r($result) ;die;
@@ -301,7 +301,8 @@
 
 		///end///
 		
-		if($result->status == 'housing_sup_approved_1')   // by debaleena 11.06.24
+		//if($result->status == 'housing_sup_approved_1')   // by debaleena 11.06.24
+		if($result->status == 'housing_approver_approved' )
 		{
 			$app_data = flat_type_wise_waiting_detail($flat_type_id);
 		

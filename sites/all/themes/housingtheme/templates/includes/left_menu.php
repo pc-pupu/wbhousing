@@ -30,7 +30,7 @@ global $user, $user_role,$base_path,$base_root;
 
 
         <?php
-            if($user_role == 10 || $user_role == 11 || $user_role == 6){
+            if($user_role == 10 || $user_role == 11 || $user_role == 6 || $user_role == 13){
                 if($user_role == 11){
                     $new_status = 'applied';
                     $next_status_app = 'ddo_verified_1';
@@ -40,6 +40,10 @@ global $user, $user_role,$base_path,$base_root;
                     $new_status = 'ddo_verified_1';
                     $next_status_app = 'housing_sup_approved_1';
                     $next_status_rej = 'housing_sup_reject_1';
+                }else if($user_role == 13){  //added by debaleena 04-09-2024
+                    $new_status = 'housing_sup_approved_1';
+                    $next_status_app = 'housing_approver_approved';
+                    $next_status_rej = 'housing_approver_reject';
                 }else if($user_role == 6){
                     $new_status = 'allotted';
                     $next_status_app = 'housing_official_approved';
@@ -182,6 +186,20 @@ global $user, $user_role,$base_path,$base_root;
                 <li class=""><?= l('Allotment List','allotment_list',array('html'=>true, 'attributes'=>array('class'=>array('nav-link')))); ?></li>
             </ul>
         </li>
+        <!------------------------27-08-2024 start-------------------------------->
+        <li class="nav-item has-submenu">
+            <a class="nav-link" href="#">
+                <i class="fa fa-pie-chart" aria-hidden="true"></i> License  
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down float-end mt-1" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                </svg>
+            </a>
+            <ul class="submenu collapse">
+                <li class=""><?= l('Generate License','generate-license',array('html'=>true, 'attributes'=>array('class'=>array('nav-link')))); ?></li>
+                <li class=""><?= l('View Generated Licenses','view-generated-license',array('html'=>true, 'attributes'=>array('class'=>array('nav-link')))); ?></li>
+            </ul>
+        </li>
+        <!-----------------------27-08-2024 end----------------------------->
 
         <?php
             }

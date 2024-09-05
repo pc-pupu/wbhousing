@@ -921,7 +921,7 @@
 			
 			$online_app_arr = array();
 			$online_app_arr['applicant_official_detail_id']  =  $data1->id;
-			$online_app_arr['status']  =  'housing_sup_approved_1';
+			$online_app_arr['status']  =  'housing_approver_approved';  // housing_sup_1 to change this by debaleena 04-09-2024
 			$online_app_arr['date_of_verified']  =  date('Y-m-d');
 			$online_app_arr['date_of_application']  =  trim( implode('-', array_reverse(explode('/', $form_state['values']['doa']))));
 			$online_app_arr['is_backlog_applicant']  =  1;

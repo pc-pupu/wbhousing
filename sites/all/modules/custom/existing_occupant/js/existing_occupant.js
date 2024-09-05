@@ -161,6 +161,7 @@
 			"district":["DDO District", "selectBox"],
 			"designation":["DDO Designation", "selectBox"],
 			
+			"dol":["Date of License","date"]  , ///debaleena 28-08-2024
 			//"rhe_flat_type":["Flat TYPE","flatType"],
 			//"reason":["Allotment Category", "selectBox"],
 			

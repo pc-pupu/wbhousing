@@ -96,27 +96,23 @@ function occupant_detail_pdf_gen($online_app_id = '', $file_name = '') {
 			
 			
 				$page_output .= '<th style="border: 1px solid black; border-collapse: collapse;">Occupant\'s Pay Band</th>';
-						 if($data->scale_from == 0 && $data->scale_to != 0){
-							$str =  $data->payband.' (Below Rs '.$data->scale_to.'/-)';
-						}else if($data->scale_from != 0 && $data->scale_to == 0){
-							$str =  $data->payband.' (Rs '.$data->scale_from.'/- and above)';
-						}else{
-							$str = $data->payband.' (Rs '.$data->scale_from.'/- to Rs '.$data->scale_to.'/-)';
-						}
+					if($data->scale_from == 0 && $data->scale_to != 0){
+						//$str =  $common_data->payband.' (Below Rs '.$common_data->scale_to.'/-)';
+						$str =  $data->flat_type.' (Below Rs '.$data->scale_to.'/-)';
+					}else if($data->scale_from != 0 && $data->scale_to == 0){
+						//$str =  $common_data->payband.' (Rs '.$common_data->scale_from.'/- and above)';
+						$str =  $data->flat_type.' (Rs '.$data->scale_from.'/- and above)';
+					}else{
+					//$str = $common_data->payband.' (Rs '.$common_data->scale_from.'/- to Rs '.$common_data->scale_to.'/-)';
+					$str = $data->flat_type.' (Rs '.$data->scale_from.'/- to Rs '.$data->scale_to.'/-)';
+					}
 				  $page_output .= '<td style="border: 1px solid black; border-collapse: collapse;">&nbsp;'.$str.'</td>
 				</tr>
 				<tr>
-				  <th style="border: 1px solid black; border-collapse: collapse;">Occupant\'s Pay in Pay Band</th>
+				  <th style="border: 1px solid black; border-collapse: collapse;">Occupant\'s Basic Pay</th>
 				  <td style="border: 1px solid black; border-collapse: collapse;">&nbsp;'.$data->pay_in_the_pay_band.'</td>
 				</tr>
-				<tr>
-				  <th style="border: 1px solid black; border-collapse: collapse;">Occupant\'s Grade Pay</th>
-				  <td style="border: 1px solid black; border-collapse: collapse;">&nbsp;'.$data->grade_pay.'</td>
-				</tr>
-				<tr>
-				  <th style="border: 1px solid black; border-collapse: collapse;">Occupant\'s GPF No.</th>
-				  <td style="border: 1px solid black; border-collapse: collapse;">&nbsp;'.$data->gpf_no.'</td>
-				</tr>
+				
 				<tr>
 				  <th style="border: 1px solid black; border-collapse: collapse;">Occupant\'s Date of Joining(dd/mm/yyyy)</th>
 				  <td style="border: 1px solid black; border-collapse: collapse;">&nbsp;'.implode('/', array_reverse(explode('-', $data->date_of_joining))).'</td>

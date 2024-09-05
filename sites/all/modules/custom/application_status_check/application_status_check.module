@@ -58,7 +58,7 @@ function common_applicant_data_fetch($app_id = '', $app_status = '') {
               --LEFT JOIN file_managed fm_vs ON fm_vs.fid = hva.file_licence
               LEFT JOIN housing_cs_application hca ON hca.online_application_id = hoa.online_application_id
               --LEFT JOIN file_managed fm_cs ON fm_cs.fid = hca.file_licence
-              LEFT JOIN housing_license_application hla ON hla.online_application_id = hoa.online_application_id
+              --LEFT JOIN housing_license_application hla ON hla.online_application_id = hoa.online_application_id
               --LEFT JOIN file_managed fm_licence ON fm_licence.fid = hla.document
               WHERE hoa.online_application_id = :enc_app_id";
 

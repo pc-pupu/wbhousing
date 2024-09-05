@@ -18,6 +18,22 @@
 		  'access arguments' => array('administer View Applicant Application'),
 		);
 
+		// 27-08-2024 start
+		$items['generate-license'] = array(
+			'title' => 'Generate License',	
+			'page callback' => 'generate_license_application',
+			//'file' => 'view_application_list_page.inc',
+			'access arguments' => array('administer License Generation Application'),
+		  );
+
+		  $items['view-generated-license'] = array(
+			'title' => 'View License List',	
+			'page callback' => 'view_license_application',
+			//'file' => 'view_application_list_page.inc',
+			'access arguments' => array('administer License Generation Application'),
+		  );
+		//end
+
 		
 		$items['application-pdf-gen/%/%'] = array(
 		  'title' => 'View Application',	
@@ -89,6 +105,11 @@
 				// file name will be custom-page.tpl.php
 				'template' => 'view_application',
 			),
+			'license_generate_template' => array(
+				'variables' => array('output' => NULL),
+				// file name will be custom-page.tpl.php
+				'template' => 'license_generate',
+			),
 		);
 	}
 	
@@ -105,6 +126,11 @@
 		'administer Application PDF' => array(
 		  'title' => t('administer Application PDF'),
 		  'description' => t('Perform administer Application PDF.'),
+		),
+
+		'administer License Generation Application' => array(
+		  'title' => t('administer Application License Generation'),
+		  'description' => t('Perform administer License Generate.'),
 		),
 	  );
 	}
@@ -229,6 +255,7 @@
 			'hla.online_application_id = hoa.online_application_id');
 		$query->leftJoin('file_managed', 'fm_licence',
 		'fm_licence.fid = hla.document');
+		$query->leftJoin('housing_process_flow', 'hpf','hpf.online_application_id = hoa.online_application_id');  // debaleena 09-08-2024
 
 
 		$query->addField('hft', 'flat_type_id');
@@ -260,6 +287,7 @@
 		$query->addField('haod', 'office_phone_no');
 		$query->addField('haod', 'hrms_id');
 		$query->addField('hoa', 'status');
+		$query->addField('hpf', 'short_code');   // debaleena 09-08-2024
 		$query->addField('hoa', 'date_of_application');
 		$query->addField('hoa', 'date_of_verified');
 		$query->addField('hoa', 'uploaded_app_form');
@@ -277,10 +305,13 @@
 		else{
 			$query->condition('hoa.online_application_id', $online_application_id, '=');
 		}
-		//echo $query; die();
+		// echo $query; die();
+		// $result = $query->execute();  
+		// $data = $result->fetchObject();
+		// echo "<pre>";print_r($data);die;
 		return $query->execute();
 	}
-//debaleena start//
+	//debaleena start//
 	function fetch_application_estate_preference($app_id = '')
 	{
 		$query = db_select('housing_new_application_estate_preferences', 'hnaep');
@@ -294,7 +325,274 @@
 		return $data;
 		//print_r($data);die;
 	}
-//end//
+	//end//
+
+	function fetch_generate_app_data(){
+		$fetch_data = generate_license_application();
+
+
+		print_r($fetch_data);die;
+		// $output = array();
+		// // $output['']
+
+		// return theme('license_generate_template', array('output' => $output));
+	}
+
+
+	// 27-08-2024 start
+	function generate_license_application(){
+		global $user;
+
+		$query = db_select('housing_applicant_official_detail', 'haod');
+		$query->innerJoin('housing_applicant', 'ha',
+		'ha.uid = haod.uid');
+		$query->innerJoin('housing_online_application', 'hoa',
+		'hoa.applicant_official_detail_id = haod.applicant_official_detail_id');
+		$query->innerJoin('housing_ddo', 'hd',
+		'hd.ddo_id = haod.ddo_id');
+		
+		$query->innerJoin('housing_allotment_status_master', 'hsm','hsm.short_code = hoa.status');
+		
+		$query->addField('ha', 'applicant_name');
+		$query->addField('hoa', 'online_application_id');
+		$query->addField('hd', 'district_code');
+		$query->addField('hd', 'ddo_designation');
+		$query->addField('hd', 'ddo_address');
+		$query->addField('haod', 'applicant_designation');
+		$query->addField('haod', 'applicant_headquarter');
+		$query->addField('haod', 'applicant_posting_place');
+		
+		$query->addField('haod', 'uid');
+		$query->addField('haod', 'pay_in_the_pay_band');
+		$query->addField('haod', 'grade_pay');
+		$query->addField('haod', 'gpf_no');
+		$query->addField('haod', 'date_of_joining');
+		$query->addField('haod', 'date_of_retirement');
+		$query->addField('haod', 'office_name');
+		$query->addField('haod', 'office_street');
+		$query->addField('haod', 'office_city_town_village');
+		$query->addField('haod', 'office_post_office');
+		$query->addField('haod', 'office_pin_code');
+		$query->addField('haod', 'office_district');
+		$query->addField('haod', 'office_phone_no');
+		$query->addField('haod', 'hrms_id');
+		$query->addField('hoa', 'status');
+		$query->addField('hoa', 'application_no');
+		$query->addField('hoa', 'date_of_application');
+		$query->addField('hoa', 'date_of_verified');//change in case of verified,rejected
+		$query->addField('hoa', 'computer_serial_no');
+		
+		$query->addField('hoa', 'is_backlog_applicant');
+		$query->addField('hoa', 'computer_serial_no');
+		$query->addField('hoa', 'uploaded_app_form');
+		//$query->addField('fm_app_form', 'uri', 'uri_app_form');
+
+		$query->condition('hoa.status','housing_sup_approved_2');
+		
+		
+		$result = $query->execute();
+		
+
+		$header = array(
+			'applicant_name' => array(
+				'data' => 'Name'
+			) ,
+			'application_no' => array(
+				'data' => 'Application No.',
+				'width'=>'20%'
+			) ,
+			'license_generate' => array(
+				'data' => 'License generation',
+				'width'=>'20%'
+			) 
+		);
+
+		$rows =array();
+		$output = '';
+		while($data = $result->fetchObject()) {
+			$fields = array();
+			$msg = 'Are you sure you want to generate License for Application No.=' .$data->application_no.'?';
+			//echo $aa;die;
+			$onclick2 = "return confirm('$msg' )";
+
+			$fields[] = $data->applicant_name;
+			$fields[] = $data->application_no;
+			$fields[] = l(
+							'<span class="text-danger" style="font-size:20px"></span><span class="btn bg-success btn-sm text-white rounded" style="font-size:12px" > Generate License</span>' ,
+							'generate-license/'.encrypt_url($data->online_application_id).'/'.'verified-list'.'/'.encrypt_url($data->status),
+								array('html'=>TRUE, 'attributes' => array('onclick' => $onclick2))
+							);
+			$rows[] = $fields;
+		}
+
+		
+
+		$variables = array(
+			'attributes' => array('class'=>array('table table-list table-striped')),
+			'header' => $header,
+			'rows' => $rows,
+			'sticky' => true,
+			'empty' => t("No data found!") // The message to be displayed if table is empty
+		  );
+  		//end
+		//sd turned off 21-06-2024
+		if(count($rows) > 0) {
+			// Render using Drupal's render API.
+			$build['datatable'] = array(
+			  '#theme' => 'datatable',
+			  '#header' => $header,
+			  '#rows' => $rows,
+			  '#attributes' => array(),
+			);
+			
+			// Or, render using a theme function.
+			$variables = array(
+			  'attributes' => array('class'=>array('table table-list table-striped')),
+			  'header' => $header,
+			  'rows' => $rows,
+			);
+			
+			$output = theme('datatable', $variables);
+		}
+		else {
+			$output = '<div>
+							<table class="datatable_no_data_found table table-list">
+								<tr class="tr_no_data_found">
+									<th class="th_no_data_found"></th>
+								</tr>
+								<tr class="tr_no_data_found">
+									<td class="td_no_data_found">No data found!</td>
+								</tr>
+							</table>
+						</div>';
+		}
+	
+	return $output;
+
+	}
+
+	function view_license_application(){
+		global $user;
+
+		$query = db_select('housing_applicant_official_detail', 'haod');
+		$query->innerJoin('housing_applicant', 'ha',
+		'ha.uid = haod.uid');
+		$query->innerJoin('housing_online_application', 'hoa',
+		'hoa.applicant_official_detail_id = haod.applicant_official_detail_id');
+		$query->innerJoin('housing_ddo', 'hd',
+		'hd.ddo_id = haod.ddo_id');
+		
+		$query->innerJoin('housing_allotment_status_master', 'hsm','hsm.short_code = hoa.status');
+		
+		$query->addField('ha', 'applicant_name');
+		$query->addField('hoa', 'online_application_id');
+		$query->addField('hd', 'district_code');
+		$query->addField('hd', 'ddo_designation');
+		$query->addField('hd', 'ddo_address');
+		$query->addField('haod', 'applicant_designation');
+		$query->addField('haod', 'applicant_headquarter');
+		$query->addField('haod', 'applicant_posting_place');
+		
+		$query->addField('haod', 'uid');
+		$query->addField('haod', 'pay_in_the_pay_band');
+		$query->addField('haod', 'grade_pay');
+		$query->addField('haod', 'gpf_no');
+		$query->addField('haod', 'date_of_joining');
+		$query->addField('haod', 'date_of_retirement');
+		$query->addField('haod', 'office_name');
+		$query->addField('haod', 'office_street');
+		$query->addField('haod', 'office_city_town_village');
+		$query->addField('haod', 'office_post_office');
+		$query->addField('haod', 'office_pin_code');
+		$query->addField('haod', 'office_district');
+		$query->addField('haod', 'office_phone_no');
+		$query->addField('haod', 'hrms_id');
+		$query->addField('hoa', 'status');
+		$query->addField('hoa', 'application_no');
+		$query->addField('hoa', 'date_of_application');
+		$query->addField('hoa', 'date_of_verified');//change in case of verified,rejected
+		$query->addField('hoa', 'computer_serial_no');
+		
+		$query->addField('hoa', 'is_backlog_applicant');
+		$query->addField('hoa', 'computer_serial_no');
+		$query->addField('hoa', 'uploaded_app_form');
+		//$query->addField('fm_app_form', 'uri', 'uri_app_form');
+
+		$query->condition('hoa.status','license_generate');
+		
+		
+		$result = $query->execute();
+		
+		$header['applicant_name'] = array('data' => 'Applicant Name');
+		$header['application_no'] = array('data' => 'Application No.');
+		$header['download_license'] = array('data' => 'Download License', 'width'=>'20%');
+
+		
+		$rows =array();
+		$output = '';
+		
+		while($data = $result->fetchObject()) {
+			$fields = array();
+			$fields[] = $data->applicant_name;
+			$fields[] = $data->application_no;	
+			
+			
+			
+			$fields[] = l(
+					'<span class="btn bg-dark btn-sm fa fa-download text-white rounded" style="font-size:12px" ></span>' ,
+					'download_licence_pdf/'.encrypt_url($data->online_application_id).'/', //
+					array('html'=>TRUE,'attributes'=> array('target' => '_blank'))
+				);
+			$rows[] = $fields;
+		}
+
+		
+
+		$variables = array(
+			'attributes' => array('class'=>array('table table-list table-striped')),
+			'header' => $header,
+			'rows' => $rows,
+			'sticky' => true,
+			'empty' => t("No data found!") // The message to be displayed if table is empty
+		  );
+  		//end
+		//sd turned off 21-06-2024
+		if(count($rows) > 0) {
+			// Render using Drupal's render API.
+			$build['datatable'] = array(
+			  '#theme' => 'datatable',
+			  '#header' => $header,
+			  '#rows' => $rows,
+			  '#attributes' => array(),
+			);
+			
+			// Or, render using a theme function.
+			$variables = array(
+			  'attributes' => array('class'=>array('table table-list table-striped')),
+			  'header' => $header,
+			  'rows' => $rows,
+			);
+			
+			$output = theme('datatable', $variables);
+		}
+		else {
+			$output = '<div>
+							<table class="datatable_no_data_found table table-list">
+								<tr class="tr_no_data_found">
+									<th class="th_no_data_found"></th>
+								</tr>
+								<tr class="tr_no_data_found">
+									<td class="td_no_data_found">No data found!</td>
+								</tr>
+							</table>
+						</div>';
+		}
+	
+	return $output;
+
+	}
+	
+
 	
 
 	

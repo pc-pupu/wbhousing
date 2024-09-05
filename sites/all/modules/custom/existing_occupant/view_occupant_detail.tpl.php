@@ -6,6 +6,8 @@
 			//die($online_app_id);
 		$result = fetch_occupant_details($online_app_id);
 			while($data = $result->fetchObject()) {	
+
+        // echo "<pre>";print_r($data);die;
 	?>
 	
   <div class="">
@@ -14,7 +16,7 @@
               <td>
                   <?php					
                   //  echo l('<img height="18" width="18" src="../'.drupal_get_path('module', 'existing_occupant').'/images/pdf_icon.png" title="Download Occupant Details" alt="PDF Icon">Download Occupant Details', 'occupant_detail_pdf/'.encrypt_url($online_app_id).'/Occupant_Details_'.$online_app_id, array('html'=>TRUE, 'attributes' => array('target' => '_blank', 'style' => 'color: #0090C7;font-weight: 400;text-decoration: none; font-size:14px')));
-                  echo l('Download Occupant Details','occupant_detail_pdf/'.encrypt_url($online_app_id).'/Occupant_Details_'.$online_app_id,array('html'=>TRUE,'attributes' => array('target' => '_blank','class' => 'btn bg-success px-5 rounded-pill btn-sm text-white fw-bolder mb-2')));//sd 21-06-2024
+                  echo l(' Download Occupant Details','occupant_detail_pdf/'.encrypt_url($online_app_id).'/Occupant_Details_'.$online_app_id,array('html'=>TRUE,'attributes' => array('target' => '_blank','class' => 'btn bg-success px-4 fa fa-download rounded-pill btn-sm text-white fw-bolder mb-2')));//sd 21-06-2024
                   ?>
               </td>
           </tr>
@@ -66,29 +68,32 @@
         <td><?php echo $data->applicant_posting_place;?></td>
       </tr>
       <tr>
-        <th style="background-color:#00000000">Occupant's Pay Band</th>
-        <?php
-                if($data->scale_from == 0 && $data->scale_to != 0){
-                  $str =  $data->payband.' (Below Rs '.$data->scale_to.'/-)';
-              }else if($data->scale_from != 0 && $data->scale_to == 0){
-                  $str =  $data->payband.' (Rs '.$data->scale_from.'/- and above)';
-              }else{
-                  $str = $data->payband.' (Rs '.$data->scale_from.'/- to Rs '.$data->scale_to.'/-)';
-              }?>
-        <td><?php echo $str;?></td>
-      </tr>
+      <th style="background-color:#00000000"> Occupant's Pay Band</th>
+       <?php
+             if($data->scale_from == 0 && $data->scale_to != 0){
+                //$str =  $common_data->payband.' (Below Rs '.$common_data->scale_to.'/-)';
+                $str =  $data->flat_type.' (Below Rs '.$data->scale_to.'/-)';
+            }else if($data->scale_from != 0 && $data->scale_to == 0){
+                //$str =  $common_data->payband.' (Rs '.$common_data->scale_from.'/- and above)';
+                $str =  $data->flat_type.' (Rs '.$data->scale_from.'/- and above)';
+            }else{
+              //$str = $common_data->payband.' (Rs '.$common_data->scale_from.'/- to Rs '.$common_data->scale_to.'/-)';
+              $str = $data->flat_type.' (Rs '.$data->scale_from.'/- to Rs '.$data->scale_to.'/-)';
+            }?>
+      <td><?php echo $str;?></td>
+    </tr>
       <tr>
-        <th style="background-color:#00000000">Occupant's Pay in Pay Band</th>
+        <th style="background-color:#00000000">Occupant's Basic Pay</th>
         <td><?php echo $data->pay_in_the_pay_band;?></td>
       </tr>
-      <tr>
+      <!-- <tr>
         <th style="background-color:#00000000">Occupant's Grade Pay</th>
-        <td><?php echo $data->grade_pay;?></td>
-      </tr>
-      <tr>
+        <td><?php //echo $data->grade_pay;?></td>
+      </tr> -->
+      <!-- <tr>
         <th style="background-color:#00000000">Occupant's GPF No.</th>
-        <td><?php echo $data->gpf_no;?></td>
-      </tr>
+        <td><?php //echo $data->gpf_no;?></td>
+      </tr> -->
       <tr>
         <th style="background-color:#00000000">Occupant's Date of Joining</th>
         <td><?php echo implode('/', array_reverse(explode('-', $data->date_of_joining)));?></td>

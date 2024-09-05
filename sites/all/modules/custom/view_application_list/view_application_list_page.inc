@@ -1,12 +1,14 @@
 <?php
 
 function view_app_page($status ='', $entity = '',$page_status ='') {
-	//echo $status;die;
-	global $user_role;
+	
+	// echo $entity;echo $status;echo $page_status ;die();
+	global $user_role,$user;
 	$status = decrypt_url($status);
 	
 	$entity = decrypt_url($entity);
-	//echo $status;echo $entity;echo $page_status; die();
+	//  echo $status;die();
+	// echo $entity;echo $status;echo $page_status ;die();
 	$output = '';
 	$rows =array(); //sd turned off 21-06-2024 //debaleena turned on 09-07-2024
 	//$header = array(); //sd turned off 21-06-2024
@@ -23,6 +25,10 @@ function view_app_page($status ='', $entity = '',$page_status ='') {
 			$statusMsg = 'Housing Supervisor(Level-1) Verified ';
 		}else if($status == 'housing_sup_reject_1'){
 			$statusMsg = 'Housing Supervisor(Level-1) Rejected ';
+		}else if($status == 'housing_approver_approved'){    //debaleena 04-09-2024
+			$statusMsg = 'Housing Approver Verified ';
+		}else if($status == 'housing_approver_reject'){
+			$statusMsg = 'Housing Approver Rejected ';
 		}else if($status == 'housing_official_approved'){
 			$statusMsg = 'Housing Official Verified ';
 		}else if($status == 'housing_official_rejected'){
@@ -72,19 +78,24 @@ function view_app_page($status ='', $entity = '',$page_status ='') {
 		else if($entity == 'renew_license'){
 			$entityMsg = 'Renew Licence ';
 		}
-			
+		// echo $statusMsg;die;	
 		drupal_set_title($statusMsg.'Application List for '.$entityMsg);
 			
 		
 		// $result = fetch_all_application_detail1($entity,$status);
 		if($page_status=='action-list'){
+			// echo $status;die;
 			$result = application_list_fetch($entity,$status);//sd
 		}else if($page_status=='verified-list'|| $page_status=='reject-list'){
+			// echo $status;die;
 			$result = application_list_fetch_for_verified_reject($entity,$status);
 		}
 		
-
-		// echo "<pre>";print_r($result);die;
+		// if($user->name == 'osd_housing'){   //debaleena 09-08-2024
+		// 	$online_application_status = fetch_online_application_status($user->uid);
+		// 	$online_application_status= $online_application_status->short_code ;
+		// }
+			
 
 
 		$header = array(
@@ -113,6 +124,18 @@ function view_app_page($status ='', $entity = '',$page_status ='') {
 				$header['approval_or_rejection_date'] = array('data' => 'Approval/Rejection Date');
 				$header['Status'] = array('data' => 'Status');
 				$header['view'] = array('data' => 'View');
+
+				// if($user->name == 'osd_housing'){   //debaleena 09-08-2024
+				// // echo $status;die;
+				// 	if($page_status == 'verified-list' && $online_application_status == 'housing_sup_approved_2' && $status == 'housing_sup_approved_2'){
+				// 		$header['generate_license'] = array('data' => 'License Generation', 'width'=>'20%');
+				// 	}
+				// 	// echo $status;die();
+				// 	if($page_status == 'verified-list' && $online_application_status == 'license_generate' && $status == 'housing_sup_approved_2'){
+						
+				// 		$header['Download Licence'] = array('data' => 'Download Licence', 'width'=>'20%');
+				// 	}
+				// }
 				
 				
 
@@ -152,7 +175,10 @@ function view_app_page($status ='', $entity = '',$page_status ='') {
 	
 		 while($data = $result->fetchObject()) {
 
-
+			//$onclick2 = "return confirm('Are you sure you want to generate License for ?')";
+			$msg = 'Are you sure you want to generate License for Application No.=' .$data->application_no.'?';
+			//echo $aa;die;
+			$onclick2 = "return confirm('$msg' )";
 			// print_r($data);die;
 			$fields = array();
 			if($entity == 'new-apply' || $entity == 'vs'||$entity == 'cs' ){
@@ -175,9 +201,28 @@ function view_app_page($status ='', $entity = '',$page_status ='') {
 									'application_detail/'.encrypt_url($data->online_application_id).'/'.'verified-list'.'/'.encrypt_url($status), //
 									array(
 											'html'=>TRUE,
-											'attributes'=> array('target' => '_blank','class'=>array('btn bg-primary btn-sm px-5 rounded-pill text-white fw-bolder')),
+											'attributes'=> array('target' => '_blank','class'=>array('btn bg-primary btn-sm px-4 rounded-pill text-white fw-bolder')),
 									)
 								);
+					// if($user->name == 'osd_housing'){
+					// 	echo $online_application_status;die;   //debaleena 09-08-2024			
+					// 	if($page_status == 'verified-list' && $online_application_status == 'housing_sup_approved_2' && $status =='housing_sup_approved_2'){
+					// 		$fields[] = l(
+					// 			'<span class="text-danger" style="font-size:20px"></span><span class="btn bg-success btn-sm text-white rounded" style="font-size:12px" > Generate License</span>' ,
+					// 			'generate-license/'.encrypt_url($data->online_application_id).'/'.'verified-list'.'/'.encrypt_url($status),
+					// 				array('html'=>TRUE, 'attributes' => array('onclick' => $onclick2))
+					// 			);	
+					// 	}
+						
+					// 	if($page_status == 'verified-list' && $online_application_status == 'license_generate' && $status == 'housing_sup_approved_2'){
+							
+					// 		$fields[] = l(
+					// 			'<span class="btn bg-dark btn-sm fa fa-download text-white rounded" style="font-size:12px" ></span>' ,
+					// 			'download_licence_pdf/'.encrypt_url($data->online_application_id).'/', //
+					// 			array('html'=>TRUE,'attributes'=> array('target' => '_blank'))
+					// 		); // Done by Subham 07-08-2024
+					// 	}
+					// }
 
 
 				}else{
@@ -205,6 +250,9 @@ function view_app_page($status ='', $entity = '',$page_status ='') {
 					}else if($status == 'ddo_verified_1'){
 						$update_status = 'housing_sup_approved_1';
 						$reject_status = 'housing_sup_reject_1';
+					}else if($status == 'housing_sup_approved_1'){
+						$update_status = 'housing_approver_approved';     //debaleena 04-09-2024
+						$reject_status='housing_approver_reject';
 					}else if($status == 'allotted'){
 						$update_status = 'housing_official_approved';
 						$reject_status='housing_official_reject';
@@ -325,3 +373,9 @@ function view_app_page($status ='', $entity = '',$page_status ='') {
 	return $output;
 }
 
+
+
+
+
+
+//end

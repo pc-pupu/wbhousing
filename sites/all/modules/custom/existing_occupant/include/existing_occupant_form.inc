@@ -669,6 +669,37 @@
 			//'#required' => TRUE,
 			//'#validated' => TRUE,
 		);
+		//license part//
+		$form['license'] = array(
+			'#type' => 'fieldset',
+			'#title' => t('License Details'),
+			'#collapsible' => FALSE, // Added
+			'#collapsed' => FALSE,  // Added
+		);
+
+		$form['license']['license_no'] = array(
+			'#title' => t('License No.'),
+			'#type' => 'textfield',
+			'#required' => TRUE,
+			'#prefix' => '<div class="row"><div class="col-md-6"><div class="form-floating">',
+			'#suffix' => '</div></div>',
+			'#element_validate' => array('element_validate_alphabatic_text'), 
+			'#attributes' => array('oninput'=>"this.value=this.value.toUpperCase()",'class'=>array('form-control')), 
+		);
+
+		$form['license']['dol'] = array(
+			'#title' => t('Date of License'),
+			'#type' => 'textfield',
+			'#attributes' => array('readonly' => 'readonly', 'id' => 'edit-dol','class'=>array('form-control')),
+			'#required' => TRUE,
+			//'#validated' => TRUE,
+			'#prefix' => '<div class="col-md-6"><div class="form-floating">',
+			'#suffix' => '</div></div></div>',
+			'#element_validate' => array('element_validate_date', 'element_validate_age'),
+		);
+
+		
+		
 		
 		//allotment type and category
 		/*$form['allotment_reason'] = array(
@@ -841,11 +872,15 @@
 	
 	
 	function existing_occupant_form_submit($form, &$form_state) {
+		
 		/*echo '<pre>';
 		print_r($form_state['values']);die();*/
 		//$name = strtolower(trim($form_state['values']['applicant_name']));
 		//$name1 = str_replace(" ","",$name);
 		//$username = str_replace(".","",$name1).rand();
+		// $license_issue_date = trim( implode('-', array_reverse(explode('/', $form_state['values']['dol']))));
+		// $licence_expiry_date = date('Y-m-d', strtotime($license_issue_date.'+3 years -1 day'));
+		// echo $licence_expiry_date;die;
 		
 		$word_c = str_word_count(trim($form_state['values']['occupant_name']));
 		$splitter = " ";
@@ -1026,7 +1061,7 @@
 			
 		$allotment_ins_arr = array();
 		$allotment_ins_arr['online_application_id']  = trim($data2->oid);
-		$allotment_ins_arr['flat_id']  = trim($form_state['values']['flat_id']);;
+		$allotment_ins_arr['flat_id']  = trim($form_state['values']['flat_id']);
 		$allotment_ins_arr['allotment_date']  =  NULL;
 		
 		//$allotment_ins_arr['allotment_no'] = 'NAL-'.$data2->oid.'-'.date("dmY");
@@ -1035,6 +1070,31 @@
 		db_insert('housing_flat_occupant')
 		->fields($allotment_ins_arr)
 		->execute();
+
+		//debaleena start 28-08-2024//
+		$query4 = db_select('housing_flat_occupant', 'hfo');
+		$query4->addExpression('MAX(flat_occupant_id)','id');
+		//$query1->condition('haod.uid', $data->max_uid, '=');
+		$result4 = $query4->execute();
+		$data4 = $result4->fetchObject();
+		
+		$license_issue_date = trim( implode('-', array_reverse(explode('/', $form_state['values']['dol']))));
+		$licence_expiry_date = date('Y-m-d', strtotime($license_issue_date.'+3 years -1 day'));
+
+		$license_details_arr = array();
+		$license_details_arr['flat_occupant_id'] =  trim($data4->id);
+		$license_details_arr['license_issue_date'] = $license_issue_date;
+		$license_details_arr['license_expiry_date'] = $licence_expiry_date;
+		$license_details_arr['existing_occupant_license_no'] = trim($form_state['values']['license_no']);
+
+		db_insert('housing_occupant_license')
+		->fields($license_details_arr)
+		->execute();
+
+		//end///
+
+
+
 		
 		$flatno = $form_state['values']['occupied_flat'];
 		drupal_set_message('Occupant Data for Flat No.- '.$flatno.' Inserted Successfully.');
